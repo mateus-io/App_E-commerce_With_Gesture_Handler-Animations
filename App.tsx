@@ -7,12 +7,18 @@ import {
   Nunito_600SemiBold
 } from '@expo-google-fonts/nunito';
 
-import { View, Text } from 'react-native';
+import LottieView from "lottie-react-native";
+
+import { View } from 'react-native';
 
 const AppLoading = () => {
   return (
     <View style= {{ backgroundColor : '#beef', display : 'flex', alignItems : 'center', justifyContent : 'center', height : '100%' }}>
-      <Text>Loading...</Text>
+      <LottieView 
+        source={require('./assets/animations/loading.json')}
+        autoPlay
+        loop 
+      />
     </View>
   );
 }

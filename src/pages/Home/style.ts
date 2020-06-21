@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-export const HomeView = styled.View `
+export const HomeView = styled.ScrollView `
     background : #bef;
     position : relative;
     display : flex;

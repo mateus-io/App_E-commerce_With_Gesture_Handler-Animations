@@ -15,7 +15,7 @@ const Home = ( { navigation }: Props ) => {
     return (
         <HomeView>
             <Header navigation={navigation.toggleDrawer}/>
-            <WelcomeContainer/>
+            <WelcomeContainer navigation={navigation}/>
         </HomeView>
     );
 }

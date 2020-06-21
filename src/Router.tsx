@@ -9,6 +9,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import Home from './pages/Home';
 import Contacts from './pages/Contacts';
 import DashBoard from './pages/DashBoard';
+import Categories from './pages/Categories';
+import ViewProduct from './pages/ViewProduct';
+import DrawerContent from './components/DrawerContent';
 
 const Drawer = createDrawerNavigator();
 
@@ -17,7 +20,7 @@ const { Navigator, Screen } = Drawer;
 const Router = () => {
     return (
         <NavigationContainer>
-            <Navigator initialRouteName="Home">
+            <Navigator drawerContent={ (props : any) => <DrawerContent {...props} /> } initialRouteName="Home">
                 <Screen name="Home" component={ 
                     Home                    
                 }/>
@@ -26,6 +29,12 @@ const Router = () => {
                 }/>
                 <Screen name="DashBoard" component={
                     DashBoard
+                }/>
+                <Screen name="Categories" component={
+                    Categories
+                }/>
+                <Screen name="ViewProduct" component={
+                    ViewProduct
                 }/>
             </Navigator>
         </NavigationContainer>

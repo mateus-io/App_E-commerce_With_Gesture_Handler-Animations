@@ -1,4 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { 
+    useRef, 
+    useState,
+    createContext, 
+    RefObject
+} from 'react';
 
 
 import {
@@ -17,7 +22,8 @@ import ImperativeScrollView, { ImperativeScrollViewHandles } from '../../compone
 const ViewProduct = ( { navigation }: Props ) => {
     const [positionXBars, setPositionXBars] = useState(0);
     const scrollViewRef = useRef<ImperativeScrollViewHandles>(null);
-    
+    const scrollCarouselRef = useRef<ImperativeScrollViewHandles>(null);
+
     return (
         <Container>
             <Header navigation={ navigation.toggleDrawer }/>
@@ -25,8 +31,14 @@ const ViewProduct = ( { navigation }: Props ) => {
                 ref={scrollViewRef}
                 positionX={positionXBars}
                 setPositionX={setPositionXBars}
+                carousel={ scrollCarouselRef }
             />
-            <Carousel setPositionX={ setPositionXBars } />
+            <Carousel
+                ref={scrollCarouselRef}
+                setPositionX={ setPositionXBars } 
+                imperativeScrollView={ scrollViewRef }
+            />
+            
         </Container>
     );
 }

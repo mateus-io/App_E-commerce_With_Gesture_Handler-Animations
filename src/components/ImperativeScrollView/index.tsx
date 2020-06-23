@@ -5,9 +5,10 @@ import React, {
     ForwardRefRenderFunction,
     PropsWithChildren,
     useEffect,
-    useState
+    useState,
+    RefObject
 } from "react";
-import { ScrollView, ScrollViewProps } from "react-native";
+import { ScrollView, ScrollViewProps, Dimensions } from "react-native";
 
 import {
     MenuContent,
@@ -30,12 +31,15 @@ export interface ImperativeScrollViewHandles {
 interface ImperativeScrollProps {
     positionX : number;
     setPositionX(positionX : number) : void;
+    carousel : RefObject<ImperativeScrollViewHandles>;
 }
+
+const DEVICE_WIDTH = Dimensions.get('window').width;
 
 const ImperativeScrollView: ForwardRefRenderFunction<
     ImperativeScrollViewHandles,
     ImperativeScrollProps
-> = ({ setPositionX, positionX }, ref) => {
+> = ({ setPositionX, positionX, carousel }, ref) => {
     const scrollViewRef = useRef<ScrollView>(null);
     const translateXAnim = useRef(new Animated.Value(0)).current
 
@@ -84,9 +88,12 @@ const ImperativeScrollView: ForwardRefRenderFunction<
                     <MenuItemContainer
                         onPress={ () => { 
                             setPositionX(0);
-                            if(scrollViewRef.current){
-                                scrollViewRef.current.scrollTo({x: 0, animated: true});
-                            } 
+                            
+                            setTimeout( () => {
+                                if(carousel.current){
+                                    carousel.current.scrollTo({x : DEVICE_WIDTH * 0, animated : true});
+                                }
+                            }, 500 );
                         } } 
                         rippleColor="transparent"
                     >
@@ -102,9 +109,17 @@ const ImperativeScrollView: ForwardRefRenderFunction<
                     <MenuItemContainer 
                         onPress={ () => {
                             setPositionX(150);
+                            
                             if(scrollViewRef.current){
-                                scrollViewRef.current.scrollTo({x: 150, animated: true});
+                                scrollViewRef.current.scrollTo({x: 0, animated: true});
                             }
+                            setTimeout( () => {
+                                if(carousel.current){
+                                    carousel.current.scrollTo({x : DEVICE_WIDTH * 1, animated : true});
+                                }
+                            }, 500 );
+                            
+                            
                         } } 
                         rippleColor="transparent"
                     >
@@ -123,6 +138,11 @@ const ImperativeScrollView: ForwardRefRenderFunction<
                             if(scrollViewRef.current){
                                 scrollViewRef.current.scrollTo({x: 300, animated: true});
                             }
+                            setTimeout( () => {
+                                if(carousel.current){
+                                    carousel.current.scrollTo({x : DEVICE_WIDTH * 2, animated : true});
+                                }
+                            }, 500 );
                         } } 
                         rippleColor="transparent"
                     >
@@ -139,9 +159,6 @@ const ImperativeScrollView: ForwardRefRenderFunction<
                     <MenuItemContainer
                         onPress={ () => { 
                             setPositionX(450);
-                            if(scrollViewRef.current){
-                                scrollViewRef.current.scrollTo({x: 450, animated: true});
-                            }
                         } } 
                         rippleColor="transparent"
                     >

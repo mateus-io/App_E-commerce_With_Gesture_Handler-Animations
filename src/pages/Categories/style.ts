@@ -113,10 +113,6 @@ export const ProductAccuracy = styled.View `
     flex-direction : row;
 `;
 
-export const ProductPriceContainer = styled.View `
-    
-`;
-
 export const ProductPrice = styled(Text) `
     font-family : 'Nunito_900Black_Italic';
     font-size : 14px;
@@ -166,6 +162,6 @@ export const ProductCircleTop = styled.View `
     border : 2px;
     border-color : #ccc;
     z-index : -1;
-`
+`;
 
 

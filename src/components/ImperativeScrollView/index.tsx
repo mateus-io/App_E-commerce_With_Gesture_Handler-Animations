@@ -35,6 +35,7 @@ interface ImperativeScrollProps {
 }
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
+const DIFFERENCE = 1;
 
 const ImperativeScrollView: ForwardRefRenderFunction<
     ImperativeScrollViewHandles,
@@ -48,7 +49,7 @@ const ImperativeScrollView: ForwardRefRenderFunction<
             translateXAnim,
             {
                 toValue: positionX,
-                duration: 500,
+                duration: 200,
             }
         ).start();
     }, [positionX] );
@@ -89,17 +90,20 @@ const ImperativeScrollView: ForwardRefRenderFunction<
                         onPress={ () => { 
                             setPositionX(0);
                             
-                            setTimeout( () => {
+                            
                                 if(carousel.current){
-                                    carousel.current.scrollTo({x : DEVICE_WIDTH * 0, animated : true});
+                                    carousel.current.scrollTo({
+                                        x : (DEVICE_WIDTH * 0) + DIFFERENCE, 
+                                        animated : true
+                                    });
                                 }
-                            }, 500 );
+                            
                         } } 
                         rippleColor="transparent"
                     >
                         <MenuItemContent>
                             <MenuItemTitle>
-                                1º
+                                Visão Geral
                             </MenuItemTitle>
                         </MenuItemContent>
                     </MenuItemContainer>
@@ -111,13 +115,21 @@ const ImperativeScrollView: ForwardRefRenderFunction<
                             setPositionX(150);
                             
                             if(scrollViewRef.current){
-                                scrollViewRef.current.scrollTo({x: 0, animated: true});
+                                scrollViewRef.current.scrollTo({
+                                    x: 0, 
+                                    animated: true
+                                });
                             }
-                            setTimeout( () => {
+                            
                                 if(carousel.current){
-                                    carousel.current.scrollTo({x : DEVICE_WIDTH * 1, animated : true});
+                                    carousel.current.scrollTo({
+                                        x : (DEVICE_WIDTH * 1) + DIFFERENCE, 
+                                        animated : true
+                                    });
                                 }
-                            }, 500 );
+                            
+                                
+                            
                             
                             
                         } } 
@@ -125,7 +137,7 @@ const ImperativeScrollView: ForwardRefRenderFunction<
                     >
                         <MenuItemContent>
                             <MenuItemTitle>
-                                2º
+                                Informações
                             </MenuItemTitle>
                         </MenuItemContent>
                     </MenuItemContainer>
@@ -135,20 +147,27 @@ const ImperativeScrollView: ForwardRefRenderFunction<
                     <MenuItemContainer 
                         onPress={ () => { 
                             setPositionX(300);
+                            
                             if(scrollViewRef.current){
-                                scrollViewRef.current.scrollTo({x: 300, animated: true});
+                                scrollViewRef.current.scrollTo({
+                                    x: 300, 
+                                    animated: true
+                                });
                             }
-                            setTimeout( () => {
+                            
                                 if(carousel.current){
-                                    carousel.current.scrollTo({x : DEVICE_WIDTH * 2, animated : true});
+                                    carousel.current.scrollTo({
+                                        x : (DEVICE_WIDTH * 2) + DIFFERENCE, 
+                                        animated : true
+                                    });
                                 }
-                            }, 500 );
+                            
                         } } 
                         rippleColor="transparent"
                     >
                         <MenuItemContent>
                             <MenuItemTitle>
-                                3º
+                                Avaliações
                             </MenuItemTitle>
                         </MenuItemContent>
                     </MenuItemContainer>

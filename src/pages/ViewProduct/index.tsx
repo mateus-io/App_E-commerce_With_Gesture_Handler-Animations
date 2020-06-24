@@ -2,7 +2,8 @@ import React, {
     useRef, 
     useState,
     createContext, 
-    RefObject
+    RefObject,
+    
 } from 'react';
 
 
@@ -25,7 +26,7 @@ const ViewProduct = ( { navigation }: Props ) => {
     const scrollCarouselRef = useRef<ImperativeScrollViewHandles>(null);
 
     return (
-        <Container>
+        <Container scrollEnabled={false} >
             <Header navigation={ navigation.toggleDrawer }/>
             <ImperativeScrollView 
                 ref={scrollViewRef}

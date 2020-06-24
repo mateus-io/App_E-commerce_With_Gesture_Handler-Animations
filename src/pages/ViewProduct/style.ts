@@ -9,7 +9,7 @@ export const Container = styled.ScrollView `
 `;
 
 export const ContentContainer = styled.View `
-    height : 20%;
+    height : 100%;
     background : #bef;
     max-width : 400px;
     margin : 0 auto;

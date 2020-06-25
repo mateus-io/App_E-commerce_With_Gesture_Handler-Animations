@@ -31,6 +31,8 @@ export interface ImperativeScrollViewHandles {
 interface ImperativeScrollProps {
     positionX : number;
     setPositionX(positionX : number) : void;
+    setIndexView(indexView : number) : void;
+    setOffsetX(offsetX : number) : void;
     carousel : RefObject<ImperativeScrollViewHandles>;
 }
 
@@ -40,7 +42,13 @@ const DIFFERENCE = 1;
 const ImperativeScrollView: ForwardRefRenderFunction<
     ImperativeScrollViewHandles,
     ImperativeScrollProps
-> = ({ setPositionX, positionX, carousel }, ref) => {
+> = ({ 
+    setPositionX, 
+    positionX, 
+    carousel, 
+    setIndexView,
+    setOffsetX
+}, ref) => {
     const scrollViewRef = useRef<ScrollView>(null);
     const translateXAnim = useRef(new Animated.Value(0)).current
 
@@ -89,21 +97,23 @@ const ImperativeScrollView: ForwardRefRenderFunction<
                     <MenuItemContainer
                         onPress={ () => { 
                             setPositionX(0);
+                            setIndexView(0);
+                            setOffsetX(DEVICE_WIDTH * 0);
                             
-                            
-                                if(carousel.current){
-                                    carousel.current.scrollTo({
-                                        x : (DEVICE_WIDTH * 0) + DIFFERENCE, 
-                                        animated : true
-                                    });
-                                }
+
+                            if(carousel.current){
+                                carousel.current.scrollTo({
+                                    x : (DEVICE_WIDTH * 0) + DIFFERENCE, 
+                                    animated : true
+                                });
+                            }
                             
                         } } 
                         rippleColor="transparent"
                     >
                         <MenuItemContent>
                             <MenuItemTitle>
-                                Visão Geral
+                                VISÃO GERAL
                             </MenuItemTitle>
                         </MenuItemContent>
                     </MenuItemContainer>
@@ -113,6 +123,8 @@ const ImperativeScrollView: ForwardRefRenderFunction<
                     <MenuItemContainer 
                         onPress={ () => {
                             setPositionX(150);
+                            setIndexView(1);
+                            setOffsetX(DEVICE_WIDTH * 1);
                             
                             if(scrollViewRef.current){
                                 scrollViewRef.current.scrollTo({
@@ -137,7 +149,7 @@ const ImperativeScrollView: ForwardRefRenderFunction<
                     >
                         <MenuItemContent>
                             <MenuItemTitle>
-                                Informações
+                                INFORMAÇÕES
                             </MenuItemTitle>
                         </MenuItemContent>
                     </MenuItemContainer>
@@ -147,6 +159,8 @@ const ImperativeScrollView: ForwardRefRenderFunction<
                     <MenuItemContainer 
                         onPress={ () => { 
                             setPositionX(300);
+                            setIndexView(2);
+                            setOffsetX(DEVICE_WIDTH * 2);
                             
                             if(scrollViewRef.current){
                                 scrollViewRef.current.scrollTo({
@@ -155,19 +169,19 @@ const ImperativeScrollView: ForwardRefRenderFunction<
                                 });
                             }
                             
-                                if(carousel.current){
-                                    carousel.current.scrollTo({
-                                        x : (DEVICE_WIDTH * 2) + DIFFERENCE, 
-                                        animated : true
-                                    });
-                                }
+                            if(carousel.current){
+                                carousel.current.scrollTo({
+                                    x : (DEVICE_WIDTH * 2) + DIFFERENCE, 
+                                    animated : true
+                                });
+                            }
                             
                         } } 
                         rippleColor="transparent"
                     >
                         <MenuItemContent>
                             <MenuItemTitle>
-                                Avaliações
+                                AVALIAÇÕES
                             </MenuItemTitle>
                         </MenuItemContent>
                     </MenuItemContainer>
@@ -178,12 +192,22 @@ const ImperativeScrollView: ForwardRefRenderFunction<
                     <MenuItemContainer
                         onPress={ () => { 
                             setPositionX(450);
+                            setIndexView(3);
+                            setOffsetX(DEVICE_WIDTH * 3);
+
+                            if(carousel.current){
+                                carousel.current.scrollTo({
+                                    x : (DEVICE_WIDTH * 3) + DIFFERENCE, 
+                                    animated : true
+                                });
+                            }
+
                         } } 
                         rippleColor="transparent"
                     >
                         <MenuItemContent>
                             <MenuItemTitle>
-                                4º
+                                COMPRE JUNTO
                             </MenuItemTitle>
                         </MenuItemContent>
                     </MenuItemContainer>

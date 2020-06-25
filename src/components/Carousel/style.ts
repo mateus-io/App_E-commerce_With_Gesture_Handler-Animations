@@ -433,7 +433,7 @@ export const SpecsValue = styled(Text) `
 `;
 
 export const SpecsValueWithBorderTop = styled.View `
-    border-top-width : 1px;
+    border-top-width : ${ StyleSheet.hairlineWidth }px;
     border-top-color : #ccc;
     color : #ccc;
     display : flex;
@@ -528,6 +528,124 @@ export const QualityText = styled.Text `
     margin : 10px;
 `;
 
+export const BarsContainer = styled.View `
+    width : 100px;
+    height : 5px;
+    display : flex;
+`;
+
+export const FiltersContainer = styled(TouchableRipple) `
+    height : 50px;
+    background  : #fff;
+    width : 100%;
+`;
+export const FiltersContent = styled.View `
+    display : flex;
+    flex-direction : row;
+    height : 50px;
+    width : 100%;
+    align-items : center;
+    padding : 25px;
+`;
+export const FiltersText = styled.Text `
+    font-family : 'Nunito_600SemiBold';
+    font-size : 16px;
+    color : #555;
+    margin-left : 10px;
+`;
+
+export const BehindModalContainer = styled(TouchableRipple) `
+    flex : 1;
+    background : #000000aa;
+`;
+export const ModalContainerContent = styled.View `
+    display : flex;
+    flex-direction : column;
+    margin : 50px;
+    
+`;
+export const ModalItemContainer = styled.View `
+    width : 100%;
+    height : 300px;
+    display : flex;
+    border-radius : 20px;
+    background : #fff;
+    padding : 20px;
+`;
+export const ModalItem = styled(TouchableRipple) `
+    width : 100%;
+    height : 50px;
+`;
+export const ModalItemRow = styled.View `
+    width : 100%;
+    height : 50px;
+    flex-direction : row;
+    background : #fff;
+    align-items : center;
+    padding : 20px;
+`;
+export const ModalMainText = styled.Text `
+    font-family : 'Nunito_900Black_Italic';
+    font-size : 18px;
+    color : #444;
+`;
+export const ModalSecondaryText = styled.Text `
+    font-family : 'Nunito_600SemiBold';
+    font-size : 16px;
+    color : #555;
+    margin-left : 10px;
+`;
+
+export const CommentsContainer = styled.View `
+    width : 100%;
+    height : 100%;
+    display : flex;
+    flex-direction : column;
+    padding-bottom : 230px;
+    background : #fff;
+`;
+
+import {
+    StyleSheet
+} from 'react-native';
+
+export const CommentsItemContainer = styled.View `
+    flex : 1;
+    position : relative;
+    border-top-width : ${ StyleSheet.hairlineWidth }px;
+    border-top-color : #ccc;
+    padding : 10px;
+`;
+
+export const CommentsText = styled.Text `
+    font-family : 'Nunito_600SemiBold';
+    font-size : 16px;
+    color : #bbb;
+    margin : 10px 0;
+`;
+export const CommentsMainPhrase = styled.Text `
+    font-family : 'Nunito_900Black_Italic';
+    font-size : 20px;
+    color : #000;
+    margin : 10px 0;
+`;
+export const CommentsPositiveFeedback = styled.Text `
+    font-family : 'Nunito_600SemiBold';
+    font-size : 16px;
+    color : #5d5;
+    margin : 10px 0;
+`;
+export const CommentsNegativeFeedback = styled.Text `
+    font-family : 'Nunito_600SemiBold';
+    font-size : 16px;
+    color : #e55;
+    margin : 10px 0;
+`;
+export const CommentsDate = styled.Text `
+    position : absolute;
+    top : 50px;
+    right : 20px;
+`;
 
 
 export const WriteNewFeedbackContainer = styled.View `
@@ -537,7 +655,7 @@ export const WriteNewFeedbackContainer = styled.View `
     flex-direction : row;
     background : #fff;
     padding-top : 5px;
-    border-top-width : 1px;
+    border-top-width : ${StyleSheet.hairlineWidth}px;
     border-top-color : #ccc;
 `;
 
@@ -555,4 +673,56 @@ export const WriteNewFeedBackText = styled.Text `
     font-family : 'Nunito_900Black_Italic';
     font-size : 14px;
     color : #dddddd;
+`;
+
+
+/**Component 4 */
+
+export const PurchaseTogetherContainer = styled.View `
+    height : ${ Math.floor(DEVICE_HEIGHT) }px;
+    width : ${ DEVICE_WIDTH }px;
+`;
+
+export const PurchaseTogetherContainerFixed = styled.View `
+    width : 100%;
+    height : 65%;
+`; 
+
+export const PurchaseTogetherContainerScroll = styled.ScrollView `
+    width : 100%;
+    height : 100%;
+`;
+export const PurchaseTogetherContentContainer = styled.View `
+    display : flex;
+    flex-direction : column;
+    width : 100%;
+    height : 100%;
+    background : #DCDCDC;
+`;
+
+export const PurchaseButtonContainer = styled.View `
+    height : 20%;
+    width : 100%;
+    display : flex;
+    flex-direction : row;
+    background : #fff;
+    padding-top : 5px;
+    border-top-width : ${StyleSheet.hairlineWidth}px;
+    border-top-color : #ccc;
+`;
+
+export const PurchaseButton = styled(TouchableRipple) `
+    flex : 1;
+    height : 50px;
+    background : #7e4;
+    margin : 4px;
+    align-items : center;
+    justify-content : center;
+    elevation : 2;
+`;
+
+export const PurchaseButtonText = styled.Text `
+    font-family : 'Nunito_900Black_Italic';
+    font-size : 14px;
+    color : #fff;
 `;

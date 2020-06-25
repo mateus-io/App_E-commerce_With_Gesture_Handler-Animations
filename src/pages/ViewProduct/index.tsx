@@ -21,7 +21,9 @@ type Props = {
 import ImperativeScrollView, { ImperativeScrollViewHandles } from '../../components/ImperativeScrollView';
 
 const ViewProduct = ( { navigation }: Props ) => {
-    const [positionXBars, setPositionXBars] = useState(0);
+    const [positionXBars, setPositionXBars] = useState<number>(0);
+    const [indexView, setIndexView] = useState<number>(0);
+    const [offsetX, setOffsetX] = useState<number>(0);
     const scrollViewRef = useRef<ImperativeScrollViewHandles>(null);
     const scrollCarouselRef = useRef<ImperativeScrollViewHandles>(null);
 
@@ -32,12 +34,19 @@ const ViewProduct = ( { navigation }: Props ) => {
                 ref={scrollViewRef}
                 positionX={positionXBars}
                 setPositionX={setPositionXBars}
+                setIndexView={setIndexView}
+                setOffsetX={setOffsetX}
                 carousel={ scrollCarouselRef }
+
             />
             <Carousel
                 ref={scrollCarouselRef}
                 setPositionX={ setPositionXBars } 
-                imperativeScrollView={ scrollViewRef }
+                imperativeScrollView={scrollViewRef}
+                setIndexView={setIndexView}
+                setOffsetX={setOffsetX}
+                offsetX={offsetX}
+                indexView={indexView}
             />
             
         </Container>

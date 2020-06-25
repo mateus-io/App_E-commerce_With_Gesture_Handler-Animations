@@ -676,15 +676,112 @@ import {
     MainFeedbackText,
     QualityBarContainer,
     QualityLineContainer,
-    QualityText
+    QualityText,
+    BarsContainer,
+    FiltersContainer,
+    FiltersContent,
+    FiltersText,
+    BehindModalContainer,
+    ModalContainerContent,
+    ModalItemContainer,
+    ModalMainText,
+    ModalItem,
+    ModalSecondaryText,
+    ModalItemRow,
+    CommentsContainer,
+    CommentsItemContainer,
+    CommentsText,
+    CommentsMainPhrase,
+    CommentsPositiveFeedback,
+    CommentsNegativeFeedback,
+    CommentsDate
 } from './style';
 
 import { ProgressBar, Colors } from 'react-native-paper';
 
+import { Modal } from 'react-native';
+
 const Component3 : React.FC = () => {
+    const [modalOpen, setModalOpen] = useState(false);
+
     return(
         <FeedbacksContainer>
             <FeedbacksContainerFixed>
+                <Modal
+                    visible={modalOpen}
+                    transparent={true}
+                >
+                    <BehindModalContainer
+                        onPress={ () => setModalOpen(false) }
+                        rippleColor="transparent"
+                    >
+                        <ModalContainerContent>
+                            <ModalItemContainer>
+                                <ModalMainText>
+                                    Ordenar por
+                                </ModalMainText>
+                                <ModalItem
+                                    onPress={ () => {} }
+                                    rippleColor="#ccc"
+                                >
+                                    <ModalItemRow>
+                                        <Feather name="check-circle" size={16} color="#55f"/>
+                                        <ModalSecondaryText>
+                                            Relevância
+                                        </ModalSecondaryText>
+                                    </ModalItemRow>
+                                </ModalItem>
+                                <ModalItem
+                                    onPress={ () => {} }
+                                    rippleColor="#ccc"
+                                >
+                                    <ModalItemRow>
+                                        <Feather name="circle" size={16} color="#ccc"/>
+                                        <ModalSecondaryText>
+                                            Mais úteis
+                                        </ModalSecondaryText>
+                                    </ModalItemRow>
+                                </ModalItem>
+
+                                <ModalItem
+                                    onPress={ () => {} }
+                                    rippleColor="#ccc"
+                                >
+                                    <ModalItemRow>
+                                        <Feather name="circle" size={16} color="#ccc"/>
+                                        <ModalSecondaryText>
+                                            Mais recentes
+                                        </ModalSecondaryText>
+                                    </ModalItemRow>
+                                </ModalItem>
+                                <ModalItem
+                                    onPress={ () => {} }
+                                    rippleColor="#ccc"
+                                >
+                                    <ModalItemRow>
+                                        <Feather name="circle" size={16} color="#ccc"/>
+                                        <ModalSecondaryText>
+                                            Melhores avaliações
+                                        </ModalSecondaryText>
+                                    </ModalItemRow>
+                                </ModalItem>
+
+                                <ModalItem 
+                                    onPress={ () => {} }
+                                    rippleColor="#ccc"
+                                >
+                                    <ModalItemRow>
+                                        <Feather name="circle" size={16} color="#ccc"/>
+                                        <ModalSecondaryText>
+                                            Piores avaliações
+                                        </ModalSecondaryText>
+                                    </ModalItemRow>
+                                </ModalItem>
+                            </ModalItemContainer>
+                        </ModalContainerContent>
+                    </BehindModalContainer>
+                </Modal>
+
                 <FeedbacksContainerScroll>
 
                     <FeedbackContentContainer>
@@ -713,9 +810,9 @@ const Component3 : React.FC = () => {
                                 <QualityText>
                                     Qualidade geral
                                 </QualityText>
-
-                                <ProgressBar progress={0.7} color={Colors.blue700} />
-
+                                <BarsContainer>
+                                    <ProgressBar progress={0.7} color={Colors.blue700} />
+                                </BarsContainer>
                                 <QualityText>
                                     3,9
                                 </QualityText>
@@ -726,7 +823,9 @@ const Component3 : React.FC = () => {
                                     Custo-benefício
                                 </QualityText>
 
-                                <ProgressBar progress={0.5} color={Colors.blue700} />
+                                <BarsContainer>
+                                    <ProgressBar progress={0.5} color={Colors.blue700} />
+                                </BarsContainer>
 
                                 <QualityText>
                                     3,8
@@ -734,6 +833,104 @@ const Component3 : React.FC = () => {
                             </QualityLineContainer>
                         </QualityBarContainer>
                         
+                        <FiltersContainer  
+                            onPress={ () => setModalOpen(true) }
+                            rippleColor="#999"
+                        >
+                            <FiltersContent>
+                                <Feather name="align-left" size={20} color="#aaa"/>
+                                <FiltersText>
+                                    Ordenar por : Relevância
+                                </FiltersText>
+                            </FiltersContent>
+                        </FiltersContainer>
+
+                        <CommentsContainer>
+                            <CommentsItemContainer>
+                                <ShowFeedbacksIconsRow>
+                                    <Feather name="anchor" size={25} color="black"/>
+                                    <Feather name="anchor" size={25} color="black"/>
+                                    <Feather name="anchor" size={25} color="black"/>
+                                    <Feather name="anchor" size={25} color="black"/>
+                                    <Feather name="anchor" size={25} color="black"/>
+                                </ShowFeedbacksIconsRow>
+                                <CommentsText>
+                                    Mateu Apolinário da silva
+                                </CommentsText>
+                                <CommentsMainPhrase>
+                                    Gostei muito!
+                                </CommentsMainPhrase>
+                                <CommentsText>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec mattis lectus. In hac habitasse platea dictumst. Sed eu ante et erat elementum gravida. Maecenas pulvinar, justo sed condimentum tristique, sem odio vestibulum ante, lobortis interdum felis nisl eget libero. Proin feugiat nibh bibendum nulla ultricies commodo. Vestibulum dictum tortor nisi, sit amet lacinia libero volutpat finibus. Donec eu augue pulvinar, finibus orci non, maximus elit. Nullam volutpat auctor elit, sed lacinia mauris hendrerit ut. Nullam in dictum quam. Quisque sagittis nibh eu odio mollis, vitae dictum diam tristique. Integer metus lectus, ornare id dignissim quis, iaculis nec elit.
+                                </CommentsText>
+                                <CommentsPositiveFeedback>
+                                    Recomendo esse produto
+                                </CommentsPositiveFeedback>
+
+                                <CommentsDate>
+                                    23/06/2020
+                                </CommentsDate>
+
+                            </CommentsItemContainer>
+
+                            <CommentsItemContainer>
+                                <ShowFeedbacksIconsRow>
+                                    <Feather name="anchor" size={25} color="black"/>
+                                    <Feather name="anchor" size={25} color="black"/>
+                                    <Feather name="anchor" size={25} color="black"/>
+                                    <Feather name="anchor" size={25} color="black"/>
+                                    <Feather name="anchor" size={25} color="black"/>
+                                </ShowFeedbacksIconsRow>
+                                <CommentsText>
+                                    Mateus Apolinário da silva
+                                </CommentsText>
+                                <CommentsMainPhrase>
+                                    Péssimo
+                                </CommentsMainPhrase>
+                                <CommentsText>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec mattis lectus. In hac habitasse platea dictumst. Sed eu ante et erat elementum gravida. Maecenas pulvinar, justo sed condimentum tristique, sem odio vestibulum ante, lobortis interdum felis nisl eget libero. Proin feugiat nibh bibendum nulla ultricies commodo. Vestibulum dictum tortor nisi, sit amet lacinia libero volutpat finibus. Donec eu augue pulvinar, finibus orci non, maximus elit. Nullam volutpat auctor elit, sed lacinia mauris hendrerit ut. Nullam in dictum quam. Quisque sagittis nibh eu odio mollis, vitae dictum diam tristique. Integer metus lectus, ornare id dignissim quis, iaculis nec elit.
+                                </CommentsText>
+                                <CommentsNegativeFeedback>
+                                    Não recomendo
+                                </CommentsNegativeFeedback>
+                                
+                                <CommentsDate>
+                                    21/06/2020
+                                </CommentsDate>
+
+                            </CommentsItemContainer>
+
+                            <CommentsItemContainer>
+                                <ShowFeedbacksIconsRow>
+                                    <Feather name="anchor" size={25} color="black"/>
+                                    <Feather name="anchor" size={25} color="black"/>
+                                    <Feather name="anchor" size={25} color="black"/>
+                                    <Feather name="anchor" size={25} color="black"/>
+                                    <Feather name="anchor" size={25} color="black"/>
+                                </ShowFeedbacksIconsRow>
+                                <CommentsText>
+                                    Mateus Apolinário da silva
+                                </CommentsText>
+                                <CommentsMainPhrase>
+                                    Péssimo
+                                </CommentsMainPhrase>
+                                <CommentsText>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec mattis lectus. In hac habitasse platea dictumst. Sed eu ante et erat elementum gravida. Maecenas pulvinar, justo sed condimentum tristique, sem odio vestibulum ante, lobortis interdum felis nisl eget libero. Proin feugiat nibh bibendum nulla ultricies commodo. Vestibulum dictum tortor nisi, sit amet lacinia libero volutpat finibus. Donec eu augue pulvinar, finibus orci non, maximus elit. Nullam volutpat auctor elit, sed lacinia mauris hendrerit ut. Nullam in dictum quam. Quisque sagittis nibh eu odio mollis, vitae dictum diam tristique. Integer metus lectus, ornare id dignissim quis, iaculis nec elit.
+                                </CommentsText>
+                                <CommentsNegativeFeedback>
+                                    Não recomendo
+                                </CommentsNegativeFeedback>
+                                
+                                <CommentsDate>
+                                    21/06/2020
+                                </CommentsDate>
+
+                            </CommentsItemContainer>
+
+
+                        </CommentsContainer>
+
+
                     </FeedbackContentContainer>
 
                 </FeedbacksContainerScroll>
@@ -750,22 +947,67 @@ const Component3 : React.FC = () => {
     );
 }
 
-const vector = [Component1,Component2,Component3];
+import {
+    PurchaseTogetherContainer,
+    PurchaseTogetherContainerFixed,
+    PurchaseTogetherContainerScroll,
+    PurchaseTogetherContentContainer,
+    PurchaseButtonContainer,
+    PurchaseButton,
+    PurchaseButtonText
+} from './style';
+
+const Component4 : React.FC = () => {
+
+    return (
+        <PurchaseTogetherContainer>
+            <PurchaseTogetherContainerFixed>
+                <PurchaseTogetherContainerScroll>
+                    <PurchaseTogetherContentContainer>
+
+
+                    </PurchaseTogetherContentContainer>
+                </PurchaseTogetherContainerScroll>
+            </PurchaseTogetherContainerFixed>
+            
+            <PurchaseButtonContainer>
+                <PurchaseButton>
+                    <PurchaseButtonText>
+                        COMPRAR
+                    </PurchaseButtonText>
+                </PurchaseButton>
+            </PurchaseButtonContainer>
+
+        </PurchaseTogetherContainer>
+    );
+}
+
+const vector = [Component1,Component2,Component3, Component4];
 
 
 interface CarouselProps {
     setPositionX(positionX : number) : void;
+    setIndexView(indexView : number) : void;
+    setOffsetX(offsetX : number) : void;
+    offsetX : number;
+    indexView : number;
     imperativeScrollView : RefObject<ImperativeScrollViewHandles>
 }
 
 const Carousel :    ForwardRefRenderFunction<
                     ImperativeScrollViewHandles,
                     CarouselProps> = 
-( { setPositionX, imperativeScrollView } , ref ) => {
+( { 
+    setPositionX, 
+    imperativeScrollView, 
+    indexView, 
+    setIndexView, 
+    offsetX, 
+    setOffsetX
+} , ref ) => {
     const scrollViewRef = useRef<ScrollView>(null);
 
-    const [indexView, setIndexView] = useState<number>(0);
-    const [offsetX, setOffsetX] = useState<number>(0);
+    
 
 
     useImperativeHandle(ref, () => ({
@@ -795,16 +1037,17 @@ const Carousel :    ForwardRefRenderFunction<
             
             if(event.nativeEvent.contentOffset.x % DEVICE_WIDTH === 0){
                 
-                if( Number(event.nativeEvent.contentOffset.x) < Number(offsetX) && indexView > 0){
+                if( Number(event.nativeEvent.contentOffset.x) < Number(offsetX) && indexView - 1 >= 0){
+                    
                     setPositionX( (indexView - 1) * 150 );
                     setIndexView( indexView - 1 );
                 }
 
-                if( Number(event.nativeEvent.contentOffset.x) > Number(offsetX) && indexView < 2 ){
+                if( Number(event.nativeEvent.contentOffset.x) > Number(offsetX) && indexView + 1 <= 3 ){
+                    
                     setPositionX( (indexView + 1) * 150 );
                     setIndexView( indexView + 1 );
                 }
-                    
                 
                 setOffsetX(event.nativeEvent.contentOffset.x);
                 

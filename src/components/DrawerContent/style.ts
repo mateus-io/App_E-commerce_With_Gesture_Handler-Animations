@@ -12,6 +12,10 @@ import {
     Caption
 } from 'react-native-paper';
 
+import {
+    StyleSheet
+} from 'react-native';
+
 import { SvgXml } from 'react-native-svg';
 
 export const ContainerScroll = styled(DrawerContentScrollView) `
@@ -41,6 +45,8 @@ export const Section = styled(Drawer.Section) `
     margin : 0;
     flex-direction : row;
     position : relative;
+    border-top-width : ${StyleSheet.hairlineWidth}px;
+    border-top-color : #ccc;
 `;
 
 export const SectionPreferences = styled(Drawer.Section) `

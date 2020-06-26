@@ -151,7 +151,7 @@ const DrawerContent : React.FC = (props : any) => {
                                 fontFamily : 'Nunito_900Black_Italic',
                                 color : '#210124',
                             }}
-                            onPress={ () => {} }
+                            onPress={ () => props.navigation.navigate('Bag') }
                         />
                     </Section>
 

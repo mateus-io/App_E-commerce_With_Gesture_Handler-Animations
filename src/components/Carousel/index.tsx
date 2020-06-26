@@ -954,8 +954,22 @@ import {
     PurchaseTogetherContentContainer,
     PurchaseButtonContainer,
     PurchaseButton,
-    PurchaseButtonText
+    PurchaseButtonText,
+    PurchaseTogetherItem,
+    PurchaseTogetherMainText,
+    PurchaseTogetherItemImage,
+    PurchaseTogetherProductInfo,
+    PurchaseTogetherProductTitle,
+    PurchaseTogetherProductIconsRowContainer,
+    PurchaseTogetherProductPriceText,
+    PurchaseTogetherProductLabelAvista,
+    PurchaseTogetherProductPriceTextPeaces,
+    PurchaseTogetherRowText,
+    PurchaseTogetherCheckContainer,
+    PurchaseTogetherStarProductContainer
 } from './style';
+
+import { Checkbox } from 'react-native-paper';
 
 const Component4 : React.FC = () => {
 
@@ -964,7 +978,206 @@ const Component4 : React.FC = () => {
             <PurchaseTogetherContainerFixed>
                 <PurchaseTogetherContainerScroll>
                     <PurchaseTogetherContentContainer>
+                        <PurchaseTogetherItem>
+                            
+                            <PurchaseTogetherItemImage
+                                source={{
+                                    uri : 'https://p.kindpng.com/picc/s/91-910946_jordan-jumpman-hustle-sneakers-hd-png-download.png'
+                                }}
+                            />
 
+                            <PurchaseTogetherProductInfo>
+                                <PurchaseTogetherProductTitle
+                                    numberOfLines={2}
+                                >
+                                    Smartphone Samsung Galaxy A20s 32GB Preto
+                                </PurchaseTogetherProductTitle>
+                                <PurchaseTogetherProductIconsRowContainer>
+
+                                    <Feather name="anchor" size={12} color="black"/>
+                                    <Feather name="anchor" size={12} color="black"/>
+                                    <Feather name="anchor" size={12} color="black"/>
+                                    <Feather name="anchor" size={12} color="black"/>
+                                    <Feather name="anchor" size={12} color="black"/>
+
+                                </PurchaseTogetherProductIconsRowContainer>
+                                <PurchaseTogetherRowText>
+                                    <PurchaseTogetherProductPriceText>
+                                        R$ 1.208,07 
+                                    </PurchaseTogetherProductPriceText>
+                                    <PurchaseTogetherProductLabelAvista>
+                                        à vista
+                                    </PurchaseTogetherProductLabelAvista>
+                                </PurchaseTogetherRowText>
+                                
+                                <PurchaseTogetherProductPriceTextPeaces>
+                                    10x de R$ 129,90
+                                </PurchaseTogetherProductPriceTextPeaces>
+
+                            </PurchaseTogetherProductInfo>
+                            <PurchaseTogetherCheckContainer>
+                                <Checkbox
+                                    status='checked'
+                                />
+                            </PurchaseTogetherCheckContainer>
+                            
+                            <PurchaseTogetherStarProductContainer>
+                                <Feather name="star" size={20} color="black"/>
+                            </PurchaseTogetherStarProductContainer>
+
+                        </PurchaseTogetherItem>
+
+                        <PurchaseTogetherMainText>
+                            Incremente seu produto com as nossas sugestões abaixo : 
+                        </PurchaseTogetherMainText>
+
+
+                        <PurchaseTogetherItem>
+                            
+                            <PurchaseTogetherItemImage
+                                source={{
+                                    uri : 'https://p.kindpng.com/picc/s/91-910946_jordan-jumpman-hustle-sneakers-hd-png-download.png'
+                                }}
+                            />
+
+                            <PurchaseTogetherProductInfo>
+                                <PurchaseTogetherProductTitle
+                                    numberOfLines={2}
+                                >
+                                    Smartphone Samsung Galaxy A20s 32GB Preto
+                                </PurchaseTogetherProductTitle>
+                                <PurchaseTogetherProductIconsRowContainer>
+
+                                    <Feather name="anchor" size={12} color="black"/>
+                                    <Feather name="anchor" size={12} color="black"/>
+                                    <Feather name="anchor" size={12} color="black"/>
+                                    <Feather name="anchor" size={12} color="black"/>
+                                    <Feather name="anchor" size={12} color="black"/>
+
+                                </PurchaseTogetherProductIconsRowContainer>
+                                <PurchaseTogetherRowText>
+                                    <PurchaseTogetherProductPriceText>
+                                        R$ 1.208,07 
+                                    </PurchaseTogetherProductPriceText>
+                                    <PurchaseTogetherProductLabelAvista>
+                                        à vista
+                                    </PurchaseTogetherProductLabelAvista>
+                                </PurchaseTogetherRowText>
+                                
+                                <PurchaseTogetherProductPriceTextPeaces>
+                                    10x de R$ 129,90
+                                </PurchaseTogetherProductPriceTextPeaces>
+
+                            </PurchaseTogetherProductInfo>
+                            <PurchaseTogetherCheckContainer>
+                                <Checkbox
+                                    status='checked'
+                                />
+                            </PurchaseTogetherCheckContainer>
+                            
+                            <PurchaseTogetherStarProductContainer>
+                                <Feather name="star" size={20} color="black"/>
+                            </PurchaseTogetherStarProductContainer>
+
+                        </PurchaseTogetherItem>
+
+                        <PurchaseTogetherItem>
+                            
+                            <PurchaseTogetherItemImage
+                                source={{
+                                    uri : 'https://p.kindpng.com/picc/s/91-910946_jordan-jumpman-hustle-sneakers-hd-png-download.png'
+                                }}
+                            />
+
+                            <PurchaseTogetherProductInfo>
+                                <PurchaseTogetherProductTitle
+                                    numberOfLines={2}
+                                >
+                                    Smartphone Samsung Galaxy A20s 32GB Preto
+                                </PurchaseTogetherProductTitle>
+                                <PurchaseTogetherProductIconsRowContainer>
+
+                                    <Feather name="anchor" size={12} color="black"/>
+                                    <Feather name="anchor" size={12} color="black"/>
+                                    <Feather name="anchor" size={12} color="black"/>
+                                    <Feather name="anchor" size={12} color="black"/>
+                                    <Feather name="anchor" size={12} color="black"/>
+
+                                </PurchaseTogetherProductIconsRowContainer>
+                                <PurchaseTogetherRowText>
+                                    <PurchaseTogetherProductPriceText>
+                                        R$ 1.208,07 
+                                    </PurchaseTogetherProductPriceText>
+                                    <PurchaseTogetherProductLabelAvista>
+                                        à vista
+                                    </PurchaseTogetherProductLabelAvista>
+                                </PurchaseTogetherRowText>
+                                
+                                <PurchaseTogetherProductPriceTextPeaces>
+                                    10x de R$ 129,90
+                                </PurchaseTogetherProductPriceTextPeaces>
+
+                            </PurchaseTogetherProductInfo>
+                            <PurchaseTogetherCheckContainer>
+                                <Checkbox
+                                    status='checked'
+                                />
+                            </PurchaseTogetherCheckContainer>
+                            
+                            <PurchaseTogetherStarProductContainer>
+                                <Feather name="star" size={20} color="black"/>
+                            </PurchaseTogetherStarProductContainer>
+
+                        </PurchaseTogetherItem>
+
+                        <PurchaseTogetherItem>
+                            
+                            <PurchaseTogetherItemImage
+                                source={{
+                                    uri : 'https://p.kindpng.com/picc/s/91-910946_jordan-jumpman-hustle-sneakers-hd-png-download.png'
+                                }}
+                            />
+
+                            <PurchaseTogetherProductInfo>
+                                <PurchaseTogetherProductTitle
+                                    numberOfLines={2}
+                                >
+                                    Smartphone Samsung Galaxy A20s 32GB Preto
+                                </PurchaseTogetherProductTitle>
+                                <PurchaseTogetherProductIconsRowContainer>
+
+                                    <Feather name="anchor" size={12} color="black"/>
+                                    <Feather name="anchor" size={12} color="black"/>
+                                    <Feather name="anchor" size={12} color="black"/>
+                                    <Feather name="anchor" size={12} color="black"/>
+                                    <Feather name="anchor" size={12} color="black"/>
+
+                                </PurchaseTogetherProductIconsRowContainer>
+                                <PurchaseTogetherRowText>
+                                    <PurchaseTogetherProductPriceText>
+                                        R$ 1.208,07 
+                                    </PurchaseTogetherProductPriceText>
+                                    <PurchaseTogetherProductLabelAvista>
+                                        à vista
+                                    </PurchaseTogetherProductLabelAvista>
+                                </PurchaseTogetherRowText>
+                                
+                                <PurchaseTogetherProductPriceTextPeaces>
+                                    10x de R$ 129,90
+                                </PurchaseTogetherProductPriceTextPeaces>
+
+                            </PurchaseTogetherProductInfo>
+                            <PurchaseTogetherCheckContainer>
+                                <Checkbox
+                                    status='checked'
+                                />
+                            </PurchaseTogetherCheckContainer>
+                            
+                            <PurchaseTogetherStarProductContainer>
+                                <Feather name="star" size={20} color="black"/>
+                            </PurchaseTogetherStarProductContainer>
+
+                        </PurchaseTogetherItem>
 
                     </PurchaseTogetherContentContainer>
                 </PurchaseTogetherContainerScroll>

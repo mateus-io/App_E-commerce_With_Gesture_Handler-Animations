@@ -11,6 +11,7 @@ import Contacts from './pages/Contacts';
 import DashBoard from './pages/DashBoard';
 import Categories from './pages/Categories';
 import ViewProduct from './pages/ViewProduct';
+import Bag from './pages/Bag';
 import DrawerContent from './components/DrawerContent';
 
 const Drawer = createDrawerNavigator();
@@ -35,6 +36,9 @@ const Router = () => {
                 }/>
                 <Screen name="ViewProduct" component={
                     ViewProduct
+                }/>
+                <Screen name="Bag" component={
+                    Bag
                 }/>
             </Navigator>
         </NavigationContainer>

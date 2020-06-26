@@ -697,7 +697,91 @@ export const PurchaseTogetherContentContainer = styled.View `
     flex-direction : column;
     width : 100%;
     height : 100%;
-    background : #DCDCDC;
+    background : #DCDCDC55;
+    padding : 10px;
+`;
+
+export const PurchaseTogetherItem = styled.View `
+    flex : 1;
+    height : 150px;
+    background : #fff;
+    flex-direction : row;
+    position : relative;
+    align-items : center;
+    elevation : 2;
+`;
+export const PurchaseTogetherItemImage = styled.Image `
+    width : 100px;
+    height : 100px;
+    margin : 10px;
+`;
+
+export const PurchaseTogetherProductInfo = styled.View `
+    display : flex;
+    flex-direction : column;
+    width : 170px;
+`;
+export const PurchaseTogetherCheckContainer = styled.View `
+    width : 30px;
+    height : 30px;
+    display : flex;
+    align-items : center;
+    position : absolute;
+    top : 20px;
+    right : 15px;
+`;
+
+export const PurchaseTogetherStarProductContainer = styled.View `
+    width : 30px;
+    height : 30px;
+    display : flex;
+    align-items : center;
+    position : absolute;
+    bottom : 15px;
+    right : 15px;
+`;
+export const PurchaseTogetherProductTitle = styled.Text `
+    font-family : 'Nunito_600SemiBold';
+    font-size : 15px;
+    color : #888;
+    margin : 5px 0;
+`;
+
+export const PurchaseTogetherProductIconsRowContainer = styled.View `
+    display : flex;
+    flex-direction : row;
+    align-items : center;
+`;
+export const PurchaseTogetherProductPriceText = styled.Text `
+    font-family : 'Nunito_600SemiBold';
+    font-size : 16px;
+    color : #111;
+    margin : 5px 0;
+`;
+export const PurchaseTogetherProductLabelAvista = styled.Text `
+    font-family : 'Nunito_600SemiBold';
+    font-size : 10px;
+    color : #111;
+    margin : 0 5px;
+`;
+
+export const PurchaseTogetherRowText = styled.View `
+    display : flex;
+    flex-direction : row;
+    align-items : center;
+`;
+
+export const PurchaseTogetherProductPriceTextPeaces = styled.Text `
+    font-family : 'Nunito_600SemiBold';
+    font-size : 12px;
+    color : #555;
+    margin : 5px 0;
+`;
+
+export const PurchaseTogetherMainText = styled.Text `
+    font-family : 'Nunito_900Black_Italic';
+    font-size : 18px;
+    color : #555;
 `;
 
 export const PurchaseButtonContainer = styled.View `

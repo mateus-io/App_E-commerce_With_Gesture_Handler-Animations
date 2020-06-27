@@ -6,6 +6,10 @@ import {
     Text
 } from 'react-native-paper';
 
+import { Dimensions } from 'react-native';
+const DEVICE_WIDTH = Dimensions.get('window').width;
+const DEVICE_HEIGHT = Dimensions.get('window').height;
+
 
 export const SearchInputContainer = styled.View `
     height : 60px;
@@ -162,6 +166,79 @@ export const ProductCircleTop = styled.View `
     border : 2px;
     border-color : #ccc;
     z-index : -1;
+`;
+
+/** scrollView com as outras categorias */
+
+export const CategoriesScrollView = styled.ScrollView `
+    height : 100px;
+    width : 100%;
+    display : flex;
+    flex-direction : row;
+    background : #dcdcdc3f;
+`;
+export const CategoriesContent = styled.View `
+    display : flex;
+    flex : 1;
+    flex-direction : row;
+    flex-wrap : wrap;
+`;
+export const CategorieItem = styled.View `
+    display : flex;
+    flex-direction : column;
+    width : 75px;
+    height : 100%;
+    justify-content : center;
+    align-items : center;
+    margin : 5px;
+`;
+export const CategorieLabel = styled.Text `
+    font-size : 14px;
+    color : #777;
+    font-family : 'Nunito_600SemiBold';
+`;
+export const CategorieImage = styled.Image `
+    width : 60px;
+    height : 60px;
+    border-radius : 30px;
+`;
+
+/**Slider */
+
+export const SliderScrollView = styled.ScrollView `
+    height : 200px;
+    width : 100%;
+    display : flex;
+    flex-direction : row;
+    background : #dcdcdc3f;
+`;
+
+export const SliderWrapper = styled.View `
+    display : flex;
+    flex : 1;
+    flex-direction : row;
+    flex-wrap : wrap;
+`;
+
+export const SliderItemContainer = styled.View `
+    width : ${ DEVICE_WIDTH - 15 }px;
+    height : 95%;
+    border-radius : 10px;
+    margin : 5px 3px;
+    border-width : 1px;
+`;
+
+export const SliderItem = styled.Image `
+    width : 100%;
+    height : 100%;
+    border-radius : 10px;
+`;
+
+export const Loading = styled.ActivityIndicator.attrs({
+    size : 'small',
+    color : '#999'
+}) `
+    margin : 30px 0;
 `;
 
 

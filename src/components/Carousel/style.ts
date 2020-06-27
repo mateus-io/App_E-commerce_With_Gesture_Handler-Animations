@@ -245,6 +245,7 @@ export const ShowMatchProducts = styled.View `
     position : relative;
     flex-direction : column;
 `;
+
 export const CarouselSuggestionCard = styled(Animated.View) `
     width : ${DEVICE_WIDTH / 2}px;
     display : flex;

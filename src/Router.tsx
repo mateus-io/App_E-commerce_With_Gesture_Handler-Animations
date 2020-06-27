@@ -12,6 +12,7 @@ import DashBoard from './pages/DashBoard';
 import Categories from './pages/Categories';
 import ViewProduct from './pages/ViewProduct';
 import Bag from './pages/Bag';
+import Favorites from './pages/Favorites';
 import DrawerContent from './components/DrawerContent';
 
 const Drawer = createDrawerNavigator();
@@ -39,6 +40,9 @@ const Router = () => {
                 }/>
                 <Screen name="Bag" component={
                     Bag
+                }/>
+                <Screen name="Favorites" component={
+                    Favorites
                 }/>
             </Navigator>
         </NavigationContainer>

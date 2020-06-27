@@ -161,6 +161,25 @@ const DrawerContent : React.FC = (props : any) => {
                                 <Feather 
                                     size={25} 
                                     color='#888'
+                                    name="award" 
+                                />
+                            ) }
+                            label="Favoritos"
+                            labelStyle={{
+                                fontSize : 20,
+                                fontFamily : 'Nunito_900Black_Italic',
+                                color : '#210124',
+                            }}
+                            onPress={ () => props.navigation.navigate('Favorites') }
+                        />
+                    </Section>
+
+                    <Section>
+                        <Item
+                            icon={() =>  (
+                                <Feather 
+                                    size={25} 
+                                    color='#888'
                                     name="moon" 
                                 />
                             ) }

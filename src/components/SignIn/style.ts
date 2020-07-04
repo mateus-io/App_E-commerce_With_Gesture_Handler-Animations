@@ -17,7 +17,9 @@ export const ContentContainer = styled.View `
     flex-direction : column;
     align-items : center;
     justify-content : center;
+    position : relative;
 `;
+
 export const SignInBox = styled(Animated.View) `
     height : 300px;
     max-width : ${ Math.floor(width) }px;
@@ -116,6 +118,65 @@ export const SignUpLabel = styled.Text `
     border-bottom-width : ${ StyleSheet.hairlineWidth }px;
     border-bottom-color : #ccc;
 `;
+
+export const LoginButtonContainer = styled.View `
+    display : flex;
+    flex-direction : row;
+    width : 300px;
+    height : 50px;
+    margin : 0 auto;
+`;
+export const BoxIconLogin = styled.View `
+    height : 100%;
+    width : 50px;
+    display : flex;
+    align-items : center;
+    justify-content : center;
+    background : #27f;
+    border-bottom-left-radius : 5px;
+    border-top-left-radius : 20px;
+`;
+export const TextBoxLogin = styled.View `
+    width : 250px;
+    height : 100%;
+    display : flex;
+    align-items : center;
+    justify-content : center;
+    background : #24f;
+    border-top-right-radius : 20px;
+    border-bottom-right-radius : 5px;
+`;
+
+export const TextLogin = styled.Text `
+    color : #ddd;
+    font-size : 17px;
+    font-family : 'Nunito_900Black_Italic';
+`;
+
+export const ErrorAdviceBox = styled(Animated.View) `
+    position : absolute;
+    top : 30px;
+    width : 300px;
+    height : 34px;
+    background : #f24c;
+    padding : 5px;
+    z-index : 2;
+`;
+export const ErrorContentRow = styled.View `
+    background : #fff;
+    border-radius : 2px;
+    display : flex;
+    flex-direction : row;
+    padding : 2px;
+    align-items : center;
+`;
+
+export const ErrorLabel = styled.Text `
+    color : #000;
+    font-family : 'Nunito_600SemiBold';
+    margin-left : 10px;
+`;
+
 
 
 

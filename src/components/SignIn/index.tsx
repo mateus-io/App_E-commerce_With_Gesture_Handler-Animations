@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import {
     Container,
@@ -12,27 +12,22 @@ import {
     SignInWithGoogleContent,
     SignInWithFacebookContent,
     SignUpContainer,
-    SignUpLabel,
-    BoxIconLogin,
-    LoginButtonContainer,
-    TextBoxLogin,
-    TextLogin,
-    ErrorAdviceBox,
-    ErrorContentRow,
-    ErrorLabel
+    SignUpLabel
 } from './style';
 
 import {
     TextInput
 } from 'react-native-paper';
 
-import { Feather } from '@expo/vector-icons';
-
 import { 
     Animated, 
     Keyboard,
     TouchableOpacity
 } from 'react-native';
+
+import SubmitButton from '../SubmitButton';
+
+import SignUp from '../SignUp';
 
 import Vars from '../../../env/getVars';
 
@@ -43,6 +38,9 @@ import api from '../../api/api';
 import * as Google from 'expo-google-app-auth';
 import * as Facebook from 'expo-facebook';
 import { storeData } from '../../utils/useAsyncStorage';
+import ErrorComponent from '../ErrorComponent';
+
+import { AppContext } from '../../context';
 
 interface Permissions {
     type : string;
@@ -52,14 +50,18 @@ interface Permissions {
     declinedPermissions : string;
 }
 
+interface SignInProps {
+    navigate(route : string) : void;
+}
 
-const SignIn : React.FC = () => {
+const SignIn : React.FC<SignInProps> = ({navigate}) => {
     const [offset] = useState(new Animated.ValueXY({ x : 0, y : 0 }));
-    const [offsetError] = useState(new Animated.ValueXY({ x : -100, y : 0 }));
     const [openKeyboard, setOpenKeyboard] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [activeErrorAlert, setActiveErrorAlert] = useState(false);
+    const [activeSignUp, setActiveSignUp] = useState(false);
+    const { state } = useContext(AppContext);
 
 
     useEffect( () => {
@@ -81,24 +83,7 @@ const SignIn : React.FC = () => {
         }
     }, [openKeyboard] );
 
-    useEffect( () => {
-        if(activeErrorAlert){
-            Animated.spring(offsetError.x, {
-                toValue : 0,
-                speed : 4,
-                bounciness : 20,
-                useNativeDriver : true
-            }).start();
-        }
-        else {
-            Animated.spring(offsetError.x, {
-                toValue : -100,
-                speed : 4,
-                bounciness : 2,
-                useNativeDriver : true
-            }).start();
-        }
-    }, [activeErrorAlert] );
+    
 
 
     async function handleSignInWithGoogle() {
@@ -107,6 +92,7 @@ const SignIn : React.FC = () => {
                 androidClientId: `${ANDROID_CLIENT_ID}`,
                 scopes: ["profile", "email"]
             });
+            
             if (result.type === "success") {
                 
                 const name = result.user.name;
@@ -114,15 +100,16 @@ const SignIn : React.FC = () => {
                 setEmail( String( result.user.email ) );
                 try {
                     const responseSignIn = await api.post('/auth', {
-                        email, 
-                        password, 
+                        email : String( result.user.email ), 
+                        password,
                         authenticate_social_mobile : "TRUE"
                     });
-                    await storeData('token', responseSignIn.data.token);
+                    await storeData('token', String(responseSignIn.data.token) );
+                    state.setLogged(true);
                 } catch {
                     try {
                         await api.post('/users', {
-                            email, 
+                            email : String( result.user.email ), 
                             password : "default", 
                             userName : name, 
                             profile_picture_url : photoUrl
@@ -148,6 +135,7 @@ const SignIn : React.FC = () => {
                 type,
                 token
             } = result as Permissions;
+            
             if (type === 'success') {
                 // Get the user's name using Facebook's Graph API
                 const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
@@ -156,15 +144,16 @@ const SignIn : React.FC = () => {
                 setEmail( String( id ) );
                 try {
                     const responseSignIn = await api.post('/auth', {
-                        email, 
+                        email : String( id ), 
                         password, 
                         authenticate_social_mobile : "TRUE"
                     });
-                    await storeData('token', responseSignIn.data.token);
+                    await storeData('token', String(responseSignIn.data.token) );
+                    state.setLogged(true);
                 } catch {
                     try {
                         await api.post('/users', {
-                            email, 
+                            email : String( id ), 
                             password : "default", 
                             userName : name, 
                             profile_picture_url : photoUrl
@@ -187,157 +176,131 @@ const SignIn : React.FC = () => {
                 authenticate_social_mobile : "FALSE"
             });
             await storeData('token', responseSignIn.data.token);
+            state.setLogged(true);
         } catch { 
             setActiveErrorAlert(true);
         }
     }
     
-    const ErrorComponent : React.FC = () => {
-        return (
-            activeErrorAlert ?
-                <ErrorAdviceBox
-                    style={
-                        {
-                            transform : [
-                                { translateX : offsetError.x }
-                            ]
-                        }
-                    }
-                >
-                    <ErrorContentRow>
-                        <TouchableOpacity 
-                            activeOpacity={.9}
-                            onPress={() => {
-                                setActiveErrorAlert(false);
-                            }}
-                        >
-                            <Feather   
-                                size={18}
-                                name="x-square"
-                                color="#111"
-                            />
-                        </TouchableOpacity>
-                        <ErrorLabel>
-                            Senha ou Email inválidos
-                        </ErrorLabel>
-                    </ErrorContentRow>
-                </ErrorAdviceBox>
-                :
-                    <></>
-        );
+    if(state.logged) {
+        navigate('Home');
     }
-
+    
 
     return (
-        <Container onPress={() => {
-            setOpenKeyboard(false);
-            Keyboard.dismiss();
-        } }>
-            
-            
-            <ContentContainer>
-                <ErrorComponent/>
-                <SignInBox
-                    style={
-                        {
-                            transform : [
-                                { translateY : offset.y }
-                            ]
+        activeSignUp ? 
+            <SignUp 
+                navigate={navigate}
+                route="Bag"
+                setActiveSignUp={setActiveSignUp}
+            />
+        :    
+            <Container onPress={() => {
+                setOpenKeyboard(false);
+                Keyboard.dismiss();
+            } }>
+                
+                
+                <ContentContainer>
+                    <ErrorComponent
+                        errorMessage="Senha ou email inválidos"
+                        setActiveErrorAlert={setActiveErrorAlert}
+                        activeErrorAlert={activeErrorAlert}
+                    />
+                    <SignInBox
+                        style={
+                            {
+                                transform : [
+                                    { translateY : offset.y }
+                                ]
+                            }
                         }
-                    }
-                >
+                    >
+                            
+                        <TextInput
+                            label="Email"
+                            value={email}
+                            onChangeText={setEmail}
+                            mode='outlined'
+                            underlineColor='#25f'
+                            numberOfLines={1}
+                            autoCorrect={false}
+                            onFocus={ () => setOpenKeyboard(true) }
+                        />
+
+                        <TextInput
+                            label="Password"
+                            value={password}
+                            onChangeText={setPassword}
+                            mode='outlined'
+                            selectionColor='#25f'
+                            numberOfLines={1}
+                            autoCorrect={false}
+                            onFocus={ () => setOpenKeyboard(true) }
+                        />
+
+                        <SignInSocialRow>
+                            <SignInSocial
+                                    onPress={handleSignInWithGoogle}
+                            >
+                                <SignInWithGoogleContent>
+                                    <SignInIconContainer>
+                                        <SignInIcon
+                                            source={{
+                                                uri : 'https://img.icons8.com/color/48/000000/google-logo.png'
+                                            }}
+                                        />
+                                    </SignInIconContainer>
+                                    <SignInText>
+                                        Entre com google
+                                    </SignInText>
+                                </SignInWithGoogleContent>
+                            </SignInSocial>
+
+                            <SignInSocial
+                                onPress={hanldeSignInWithFacebook}
+                            >
+                                <SignInWithFacebookContent>
+                                    <SignInIconContainer>
+                                        <SignInIcon
+                                            source={{
+                                                uri : 'https://img.icons8.com/fluent/48/000000/facebook-new.png'
+                                            }}
+                                        />
+                                    </SignInIconContainer>
+                                    <SignInText>
+                                        Entre com facebook
+                                    </SignInText>
+                                </SignInWithFacebookContent>
+                            </SignInSocial>
+                        </SignInSocialRow>
+
+                        <SignUpContainer
+                            onPress={() => setActiveSignUp(true)}
+                        >
+                            <SignUpLabel>
+                                Não tenho uma conta
+                            </SignUpLabel>
+                        </SignUpContainer>
                         
-                    <TextInput
-                        label="Email"
-                        value={email}
-                        onChangeText={setEmail}
-                        mode='outlined'
-                        underlineColor='#25f'
-                        numberOfLines={1}
-                        autoCorrect={false}
-                        onFocus={ () => setOpenKeyboard(true) }
-                    />
-
-                    <TextInput
-                        label="Password"
-                        value={password}
-                        onChangeText={setPassword}
-                        mode='outlined'
-                        selectionColor='#25f'
-                        numberOfLines={1}
-                        autoCorrect={false}
-                        onFocus={ () => setOpenKeyboard(true) }
-                    />
-
-                    <SignInSocialRow>
-                        <SignInSocial
-                                onPress={handleSignInWithGoogle}
+                        <TouchableOpacity
+                            activeOpacity={.9}
+                            onPress={handleSignIn}
                         >
-                            <SignInWithGoogleContent>
-                                <SignInIconContainer>
-                                    <SignInIcon
-                                        source={{
-                                            uri : 'https://img.icons8.com/color/48/000000/google-logo.png'
-                                        }}
-                                    />
-                                </SignInIconContainer>
-                                <SignInText>
-                                    Entre com google
-                                </SignInText>
-                            </SignInWithGoogleContent>
-                        </SignInSocial>
+                            <SubmitButton
+                                icon="log-in"
+                                firstColor="#24f"
+                                secondaryColor="#27f"
+                                fontColor="#ddd"
+                                iconColor="#fff"
+                                label="ENTRAR"
+                            />
+                        </TouchableOpacity>
 
-                        <SignInSocial
-                            onPress={hanldeSignInWithFacebook}
-                        >
-                            <SignInWithFacebookContent>
-                                <SignInIconContainer>
-                                    <SignInIcon
-                                        source={{
-                                            uri : 'https://img.icons8.com/fluent/48/000000/facebook-new.png'
-                                        }}
-                                    />
-                                </SignInIconContainer>
-                                <SignInText>
-                                    Entre com facebook
-                                </SignInText>
-                            </SignInWithFacebookContent>
-                        </SignInSocial>
-                    </SignInSocialRow>
-
-                    <SignUpContainer
-                        onPress={() => {}}//cadastrar
-                    >
-                        <SignUpLabel>
-                            Não tenho uma conta
-                        </SignUpLabel>
-                    </SignUpContainer>
-                    
-                    <TouchableOpacity
-                        activeOpacity={.9}
-                        onPress={handleSignIn}
-                    >
-                        <LoginButtonContainer>
-                            <BoxIconLogin>
-                                <Feather   
-                                    size={30}
-                                    name="user-plus"
-                                    color="#fff"
-                                />
-                            </BoxIconLogin>
-                            <TextBoxLogin>
-                                <TextLogin>
-                                    ENTRAR
-                                </TextLogin>
-                            </TextBoxLogin>
-                        </LoginButtonContainer>
-
-                    </TouchableOpacity>
-
-                </SignInBox>
-                    
-            </ContentContainer>
-        </Container>
+                    </SignInBox>
+                        
+                </ContentContainer>
+            </Container>
     );
 }
 

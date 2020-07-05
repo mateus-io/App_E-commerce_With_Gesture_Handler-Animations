@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import { 
     Container,
@@ -24,6 +24,8 @@ import {
     DrawerItem
 } from '@react-navigation/drawer';
 
+import { getData, storeData } from '../../utils/useAsyncStorage';
+
 import {
     TouchableRipple,
     Switch,
@@ -34,6 +36,10 @@ import {
     Feather
 } from '@expo/vector-icons';
 
+import { AppContext } from '../../context';
+
+import api from '../../api/api';
+
 const xml =  `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="150 120 1145 310">
         <path fill="#fff" d="M0,256L48,266.7C96,277,192,299,288,261.3C384,224,480,128,576,122.7C672,117,768,203,864,218.7C960,235,1056,181,1152,186.7C1248,192,1344,256,1392,288L1440,320L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
@@ -42,6 +48,40 @@ const xml =  `
 
 const DrawerContent : React.FC = (props : any) => {
     const [isDarkTheme, setIsDarkTheme] = useState(false);
+    const [photoURL, setPhotoURL] = useState("https://img.icons8.com/officel/80/000000/person-male.png"); 
+    const [name, setName] = useState("Clique na foto para entrar");
+
+    const { state } = useContext(AppContext);
+
+    async function updateUserInfo(){
+        if(state.logged){
+            const token = await getData('token');
+            try{
+                const response = await api.get('/profile', {
+                    headers : {
+                        Authorization : token
+                    }
+                });
+                console.log(response.data);
+                setPhotoURL(String(response.data.profile_picture));
+                setName(String(response.data.userName));
+            } catch(e) {
+                console.log(e);
+            }
+            
+        } else {
+            setPhotoURL("https://img.icons8.com/officel/80/000000/person-male.png");
+            setName("Clique na foto para entrar");
+        }
+    }
+
+    useEffect( () => { 
+        updateUserInfo();
+    }, [state.logged]);
+
+    useEffect( () => { 
+        updateUserInfo();
+    }, []);
 
     const toggleTheme = () => {
         setIsDarkTheme(!isDarkTheme);
@@ -55,7 +95,7 @@ const DrawerContent : React.FC = (props : any) => {
                         <ProfilePictureContainer>
                             <Avatar.Image
                                 source={ {
-                                    uri :  'https://images.unsplash.com/photo-1569605803663-e9337d901ff9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80'
+                                    uri : photoURL
                                 } }
                                 size={72}
                             />
@@ -63,10 +103,10 @@ const DrawerContent : React.FC = (props : any) => {
                         <InfoContainer>
                             <NameContainer>
                                 <MainText>
-                                    Mateus Apolinário
+                                    {name}
                                 </MainText>
                                 <CustomTitle>
-                                    @Alguém
+                                    @{name}
                                 </CustomTitle>
                             </NameContainer>
                         </InfoContainer>
@@ -226,7 +266,10 @@ const DrawerContent : React.FC = (props : any) => {
                         fontFamily : 'Nunito_900Black_Italic',
                         color : '#210124',
                     }}
-                    onPress={ () => {} }
+                    onPress={ () => {
+                        storeData('token', JSON.stringify(null));
+                        state.setLogged(false);
+                    } }
                 />
             </Section>
         </Container>

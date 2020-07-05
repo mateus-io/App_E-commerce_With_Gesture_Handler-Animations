@@ -14,6 +14,8 @@ import ViewProduct from './pages/ViewProduct';
 import Bag from './pages/Bag';
 import Favorites from './pages/Favorites';
 import DrawerContent from './components/DrawerContent';
+import { AppProvider } from './context';
+
 
 const Drawer = createDrawerNavigator();
 
@@ -21,31 +23,33 @@ const { Navigator, Screen } = Drawer;
 
 const Router = () => {
     return (
-        <NavigationContainer>
-            <Navigator drawerContent={ (props : any) => <DrawerContent {...props} /> } initialRouteName="Home">
-                <Screen name="Home" component={ 
-                    Home                    
-                }/>
-                <Screen name="Contacts" component={
-                    Contacts
-                }/>
-                <Screen name="DashBoard" component={
-                    DashBoard
-                }/>
-                <Screen name="Categories" component={
-                    Categories
-                }/>
-                <Screen name="ViewProduct" component={
-                    ViewProduct
-                }/>
-                <Screen name="Bag" component={
-                    Bag
-                }/>
-                <Screen name="Favorites" component={
-                    Favorites
-                }/>
-            </Navigator>
-        </NavigationContainer>
+        <AppProvider>
+            <NavigationContainer>
+                <Navigator drawerContent={ (props : any) => <DrawerContent {...props} /> } initialRouteName="Home">
+                    <Screen name="Home" component={ 
+                        Home                    
+                    }/>
+                    <Screen name="Contacts" component={
+                        Contacts
+                    }/>
+                    <Screen name="DashBoard" component={
+                        DashBoard
+                    }/>
+                    <Screen name="Categories" component={
+                        Categories
+                    }/>
+                    <Screen name="ViewProduct" component={
+                        ViewProduct
+                    }/>
+                    <Screen name="Bag" component={
+                        Bag
+                    }/>
+                    <Screen name="Favorites" component={
+                        Favorites
+                    }/>
+                </Navigator>
+            </NavigationContainer>
+        </AppProvider>
         
     );
 }

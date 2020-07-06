@@ -6,6 +6,10 @@ import {
 } from '@react-navigation/drawer';
 
 import {
+    Feather
+} from '@expo/vector-icons';
+
+import {
     Text,
     Title,
     Drawer,
@@ -18,13 +22,17 @@ import {
 
 import { SvgXml } from 'react-native-svg';
 
+export const CustomIcon = styled(Feather) `
+    color : ${ props => props.theme.colors.label };
+`;
+
 export const ContainerScroll = styled(DrawerContentScrollView) `
     width : 100%;
     display :  flex;
     position: relative;
 `;
 export const Container = styled.View `
-    background : #dff;
+    background : ${ props => props.theme.colors.secundary };
     flex : 1;
     display :  flex;
 `;
@@ -46,7 +54,7 @@ export const Section = styled(Drawer.Section) `
     flex-direction : row;
     position : relative;
     border-top-width : ${StyleSheet.hairlineWidth}px;
-    border-top-color : #ccc;
+    border-top-color : ${ props => props.theme.colors.labelButton };
 `;
 
 export const SectionPreferences = styled(Drawer.Section) `
@@ -68,28 +76,30 @@ export const PreferencesContainer = styled.View `
     padding : 2px;
 `;
 
+
 export const Item = styled(DrawerItem) `
     width : 100%;
     margin : 0;
+    
 `; 
 
 export const MainText = styled(Text) `
     font-size : 13px;
     font-family : 'Nunito_900Black_Italic';
-    color : #21011f;
+    color : ${ props => props.theme.colors.text};
     text-align : justify;
 `;
 
 export const CustomTitle = styled(Title) `
     font-size : 13px;
     font-family : 'Nunito_600SemiBold';
-    color : #888;
+    color : ${ props => props.theme.colors.label };
 `;
 
 export const NumberCaption = styled(Caption) `
     font-size : 13px;
     font-family : 'Nunito_900Black_Italic';
-    color : #21011f;
+    color : ${ props => props.theme.colors.text };
 `;
 
 export const Content = styled.View `
@@ -105,7 +115,7 @@ export const UserInfoContainer = styled.View `
     flex-direction : row;
 `
 export const ProfilePictureContainer = styled.View `
-    background : #bee;
+    background : ${ props => props.theme.colors.primary };
     width : 80px;
     height : 80px;
     margin : 10px 15px;

@@ -119,6 +119,13 @@ export const SignUpLabel = styled.Text `
     border-bottom-color : #ccc;
 `;
 
+export const Loading = styled.ActivityIndicator.attrs({
+    size : 'small',
+    color : '#999'
+}) `
+    margin : 30px 0;
+`;
+
 
 
 

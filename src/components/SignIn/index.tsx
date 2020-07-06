@@ -12,7 +12,8 @@ import {
     SignInWithGoogleContent,
     SignInWithFacebookContent,
     SignUpContainer,
-    SignUpLabel
+    SignUpLabel,
+    Loading
 } from './style';
 
 import {
@@ -61,6 +62,7 @@ const SignIn : React.FC<SignInProps> = ({navigate}) => {
     const [password, setPassword] = useState("");
     const [activeErrorAlert, setActiveErrorAlert] = useState(false);
     const [activeSignUp, setActiveSignUp] = useState(false);
+    const [loading, setLoading] = useState(false);
     const { state } = useContext(AppContext);
 
 
@@ -87,6 +89,7 @@ const SignIn : React.FC<SignInProps> = ({navigate}) => {
 
 
     async function handleSignInWithGoogle() {
+        setLoading(true);
         try {
             const result = await Google.logInAsync({
                 androidClientId: `${ANDROID_CLIENT_ID}`,
@@ -98,6 +101,7 @@ const SignIn : React.FC<SignInProps> = ({navigate}) => {
                 const name = result.user.name;
                 const photoUrl = result.user.photoUrl;
                 setEmail( String( result.user.email ) );
+                
                 try {
                     const responseSignIn = await api.post('/auth', {
                         email : String( result.user.email ), 
@@ -114,6 +118,14 @@ const SignIn : React.FC<SignInProps> = ({navigate}) => {
                             userName : name, 
                             profile_picture_url : photoUrl
                         });
+
+                        const responseSignIn = await api.post('/auth', {
+                            email : String( result.user.email ), 
+                            password : "default",
+                            authenticate_social_mobile : "TRUE"
+                        });
+                        await storeData('token', String(responseSignIn.data.token) );
+                        state.setLogged(true);
                     } catch {  }
                 }
             } else {
@@ -122,10 +134,11 @@ const SignIn : React.FC<SignInProps> = ({navigate}) => {
         } catch (e) {
             console.log("error", e);
         }
-
+        setLoading(false);
 
     }
     async function hanldeSignInWithFacebook() {
+        setLoading(true);
         try {
             await Facebook.initializeAsync(`${FACEBOOK_APP_ID}`);
             const result = await Facebook.logInWithReadPermissionsAsync({
@@ -158,7 +171,14 @@ const SignIn : React.FC<SignInProps> = ({navigate}) => {
                             userName : name, 
                             profile_picture_url : photoUrl
                         });
-                    } catch {  }
+                        const responseSignIn = await api.post('/auth', {
+                            email : String( id ), 
+                            password : "default", 
+                            authenticate_social_mobile : "TRUE"
+                        });
+                        await storeData('token', String(responseSignIn.data.token) );
+                        state.setLogged(true);
+                    } catch { }
                 }
             } else {
               // type === 'cancel'
@@ -166,9 +186,11 @@ const SignIn : React.FC<SignInProps> = ({navigate}) => {
         } catch ({ message }) {
             alert(`Facebook Login Error: ${message}`);
         }
+        setLoading(false);
     }
 
     async function handleSignIn () {
+        setLoading(true);
         try {
             const responseSignIn = await api.post('/auth', {
                 email, 
@@ -180,6 +202,7 @@ const SignIn : React.FC<SignInProps> = ({navigate}) => {
         } catch { 
             setActiveErrorAlert(true);
         }
+        setLoading(false);
     }
     
     if(state.logged) {
@@ -202,6 +225,9 @@ const SignIn : React.FC<SignInProps> = ({navigate}) => {
                 
                 
                 <ContentContainer>
+                    {
+                        loading ? <Loading/> : <></>
+                    }
                     <ErrorComponent
                         errorMessage="Senha ou email inválidos"
                         setActiveErrorAlert={setActiveErrorAlert}

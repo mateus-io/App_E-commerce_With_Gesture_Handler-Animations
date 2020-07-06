@@ -8,6 +8,7 @@ import {
 } from '@expo-google-fonts/nunito';
 
 import LottieView from "lottie-react-native";
+import { AppProvider } from './src/context';
 
 import { View } from 'react-native';
 
@@ -28,5 +29,9 @@ export default function App() {
     Nunito_900Black_Italic,
     Nunito_600SemiBold
   });
-  return !fontsLoaded ? <AppLoading /> : <Router/>;
+  return !fontsLoaded ? 
+                        <AppLoading /> :
+                        <AppProvider>
+                          <Router/>
+                        </AppProvider>;
 }

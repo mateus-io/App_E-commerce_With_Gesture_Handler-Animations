@@ -16,13 +16,9 @@ import {
     NumberCaption,
     Wave,
     PreferencesContainer,
-    SectionPreferences
+    SectionPreferences,
+    CustomIcon
 } from './style';
-
-import {
-    DrawerContentScrollView,
-    DrawerItem
-} from '@react-navigation/drawer';
 
 import { getData, storeData } from '../../utils/useAsyncStorage';
 
@@ -32,19 +28,13 @@ import {
     Avatar
 } from 'react-native-paper';
 
-import {
-    Feather
-} from '@expo/vector-icons';
-
 import { AppContext } from '../../context';
 
 import api from '../../api/api';
 
-const xml =  `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="150 120 1145 310">
-        <path fill="#fff" d="M0,256L48,266.7C96,277,192,299,288,261.3C384,224,480,128,576,122.7C672,117,768,203,864,218.7C960,235,1056,181,1152,186.7C1248,192,1344,256,1392,288L1440,320L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
-    </svg> `;
-
+import { ThemeContext } from 'styled-components/native';
+import dark from '../../styles/themes/dark';
+import light from '../../styles/themes/light';
 
 const DrawerContent : React.FC = (props : any) => {
     const [isDarkTheme, setIsDarkTheme] = useState(false);
@@ -52,6 +42,12 @@ const DrawerContent : React.FC = (props : any) => {
     const [name, setName] = useState("Clique na foto para entrar");
 
     const { state } = useContext(AppContext);
+    const { colors } = useContext(ThemeContext);
+
+    const xml = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="150 120 1145 310">
+        <path fill=${colors.background} d="M0,256L48,266.7C96,277,192,299,288,261.3C384,224,480,128,576,122.7C672,117,768,203,864,218.7C960,235,1056,181,1152,186.7C1248,192,1344,256,1392,288L1440,320L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+    </svg> `;
 
     async function updateUserInfo(){
         if(state.logged){
@@ -62,7 +58,7 @@ const DrawerContent : React.FC = (props : any) => {
                         Authorization : token
                     }
                 });
-                console.log(response.data);
+
                 setPhotoURL(String(response.data.profile_picture));
                 setName(String(response.data.userName));
             } catch(e) {
@@ -84,6 +80,7 @@ const DrawerContent : React.FC = (props : any) => {
     }, []);
 
     const toggleTheme = () => {
+        state.setTheme(isDarkTheme ? dark : light);
         setIsDarkTheme(!isDarkTheme);
     }
 
@@ -125,9 +122,8 @@ const DrawerContent : React.FC = (props : any) => {
                     <Section>
                         <Item
                             icon={() =>  (
-                                <Feather 
+                                <CustomIcon 
                                     size={25} 
-                                    color='#888'
                                     name="home" 
                                 />
                             ) }
@@ -135,7 +131,7 @@ const DrawerContent : React.FC = (props : any) => {
                             labelStyle={{
                                 fontSize : 20,
                                 fontFamily : 'Nunito_900Black_Italic',
-                                color : '#210124',
+                                color :  colors.text
                             }}
                             onPress={ () => props.navigation.navigate('Home') }
                         />
@@ -143,17 +139,18 @@ const DrawerContent : React.FC = (props : any) => {
                     <Section>
                         <Item
                             icon={() =>  (
-                                <Feather 
+                                <CustomIcon 
                                     size={25} 
-                                    color='#888'
+                                    
                                     name="shopping-cart" 
                                 />
                             ) }
                             label="Produtos"
+                            
                             labelStyle={{
                                 fontSize : 20,
                                 fontFamily : 'Nunito_900Black_Italic',
-                                color : '#210124',
+                                color : colors.text
                             }}
                             onPress={ () => props.navigation.navigate('DashBoard') }
                         />
@@ -161,9 +158,9 @@ const DrawerContent : React.FC = (props : any) => {
                     <Section>
                         <Item
                             icon={() =>  (
-                                <Feather 
+                                <CustomIcon 
                                     size={25} 
-                                    color='#888'
+                                    
                                     name="phone" 
                                 />
                             ) }
@@ -171,7 +168,7 @@ const DrawerContent : React.FC = (props : any) => {
                             labelStyle={{
                                 fontSize : 20,
                                 fontFamily : 'Nunito_900Black_Italic',
-                                color : '#210124',
+                                color : colors.text
                             }}
                             onPress={ () => props.navigation.navigate('Contacts') }
                         />
@@ -179,9 +176,9 @@ const DrawerContent : React.FC = (props : any) => {
                     <Section>
                         <Item
                             icon={() =>  (
-                                <Feather 
+                                <CustomIcon 
                                     size={25} 
-                                    color='#888'
+                                    
                                     name="star" 
                                 />
                             ) }
@@ -189,7 +186,7 @@ const DrawerContent : React.FC = (props : any) => {
                             labelStyle={{
                                 fontSize : 20,
                                 fontFamily : 'Nunito_900Black_Italic',
-                                color : '#210124',
+                                color : colors.text
                             }}
                             onPress={ () => props.navigation.navigate('Bag') }
                         />
@@ -198,9 +195,9 @@ const DrawerContent : React.FC = (props : any) => {
                     <Section>
                         <Item
                             icon={() =>  (
-                                <Feather 
+                                <CustomIcon 
                                     size={25} 
-                                    color='#888'
+                                    
                                     name="award" 
                                 />
                             ) }
@@ -208,7 +205,7 @@ const DrawerContent : React.FC = (props : any) => {
                             labelStyle={{
                                 fontSize : 20,
                                 fontFamily : 'Nunito_900Black_Italic',
-                                color : '#210124',
+                                color : colors.text
                             }}
                             onPress={ () => props.navigation.navigate('Favorites') }
                         />
@@ -217,9 +214,9 @@ const DrawerContent : React.FC = (props : any) => {
                     <Section>
                         <Item
                             icon={() =>  (
-                                <Feather 
+                                <CustomIcon 
                                     size={25} 
-                                    color='#888'
+                                    
                                     name="moon" 
                                 />
                             ) }
@@ -227,7 +224,7 @@ const DrawerContent : React.FC = (props : any) => {
                             labelStyle={{
                                 fontSize : 20,
                                 fontFamily : 'Nunito_900Black_Italic',
-                                color : '#210124',
+                                color : colors.text
                             }}
                             onPress={() => {toggleTheme()}}
                         />
@@ -254,9 +251,8 @@ const DrawerContent : React.FC = (props : any) => {
             <Section>
                 <Item
                     icon={() =>  (
-                        <Feather 
+                        <CustomIcon 
                             size={25} 
-                            color='#888'
                             name="log-out" 
                         />
                     ) }
@@ -264,7 +260,7 @@ const DrawerContent : React.FC = (props : any) => {
                     labelStyle={{
                         fontSize : 20,
                         fontFamily : 'Nunito_900Black_Italic',
-                        color : '#210124',
+                        color : colors.text
                     }}
                     onPress={ () => {
                         storeData('token', JSON.stringify(null));

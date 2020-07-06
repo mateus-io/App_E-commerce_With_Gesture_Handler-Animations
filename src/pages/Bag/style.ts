@@ -12,7 +12,7 @@ import {
 export const Container = styled.View `
     flex : 1;
     display : flex;
-    background : #ffffff;
+    background : ${ props => props.theme.colors.background };
     position : relative;
     flex-direction : column;
 `;
@@ -27,7 +27,7 @@ export const ProductItemContainer = styled.View `
     flex-direction : column;
     height : 310px;
     width : 97%;
-    background : #fff;
+    background : ${ props => props.theme.colors.background };
     elevation : 5;
     margin : 5px;
 `;
@@ -44,7 +44,6 @@ export const ProductItemMainContent = styled.View `
 export const ProductImage = styled.Image `
     width : 100px;
     height : 100px;
-    elevation : 2;
     margin : 0 5px;
 `;
 
@@ -55,7 +54,7 @@ export const ProductInformationRightSide = styled.View `
 `;
 export const ProductLabelTitle = styled.Text `
     font-size : 15px;
-    color : #777;
+    color : ${ props => props.theme.colors.label };
     font-family : 'Nunito_600SemiBold';
     margin : 20px 0; 
 `;
@@ -67,13 +66,13 @@ export const ProductLabelExtraInformation = styled.View `
 `;
 export const ProductLabelExtraText = styled.Text `
     font-size : 11px;
-    color : #555;
+    color : ${ props => props.theme.colors.label };
     font-family : 'Nunito_600SemiBold';
     margin : 0 5px;
 `;
 export const ProductLavelExtraTextBottom = styled.Text `
     font-size : 11px;
-    color : #210124;;
+    color : ${ props => props.theme.colors.text };
     font-family : 'Nunito_600SemiBold';
 `;
 
@@ -85,7 +84,7 @@ export const ProductQuantityContainer = styled.View `
 `;
 export const ProductQuantityTitle = styled.Text `
     font-size : 14px;
-    color : #777;
+    color : ${ props => props.theme.colors.label };
     font-family : 'Nunito_600SemiBold';
     margin : 0 5px;
 `;
@@ -102,9 +101,9 @@ export const ProductQuantitySwitchContainer = styled.View `
     flex-direction : row;
     height : 50px;
     width : 125px;
-    background : #fff;
+    background : ${ props => props.theme.colors.background };
     border-width : ${ StyleSheet.hairlineWidth }px;
-    border-color : #555;
+    border-color : ${ props => props.theme.colors.label };
 `;
 export const ProductQuantitySwitchItemContainer = styled.View `
     display : flex;
@@ -120,7 +119,7 @@ export const ProductQuantitySwitchItemTouchable = styled(TouchableRipple) `
 `;
 export const ProductQuatitySwitchNumberLabel = styled.Text `
     font-size : 17px;
-    color : #210124;
+    color : ${ props => props.theme.colors.text };
     font-family : 'Nunito_600SemiBold';
 `;
 
@@ -132,24 +131,24 @@ export const ProductQuantityPriceContainer = styled.View `
     align-items : flex-end;
     justify-content : center;
     border-bottom-width : ${ StyleSheet.hairlineWidth }px;
-    border-bottom-color : #ddd;
+    border-bottom-color : ${ props => props.theme.colors.labelButton };
     border-top-width : ${ StyleSheet.hairlineWidth }px;
-    border-top-color : #ddd;
+    border-top-color : ${ props => props.theme.colors.labelButton };
 `;
 export const ProductQuantityPriceMainText = styled.Text `
     font-size : 16px;
-    color : #333;
+    color : ${ props => props.theme.colors.text };
     font-family : 'Nunito_600SemiBold';
 `;
 export const ProductQuantityPriceDiscount = styled.Text `
     font-size : 14px;
-    color : #555;
+    color : ${ props => props.theme.colors.label };
     font-family : 'Nunito_600SemiBold';
 `;
 
 export const ProductExtraItemsContainer = styled.View `
     border-top-width : ${ StyleSheet.hairlineWidth }px;
-    border-top-color : #ddd;
+    border-top-color : ${ props => props.theme.colors.labelButton };
     width : 100%;
     height : 50px;
     display : flex;
@@ -159,12 +158,12 @@ export const ProductExtraItemsContainer = styled.View `
 `;
 export const ProductExtraMainText = styled.Text `
     font-size : 14px;
-    color : #210124;
+    color : ${ props => props.theme.colors.text };
     font-family : 'Nunito_600SemiBold';
 `;
 export const ProductExtraSecondaryText = styled.Text `
     font-size : 14px;
-    color : #777;
+    color : ${ props => props.theme.colors.label };
     font-family : 'Nunito_600SemiBold';
 `;
 export const ProductExtraColumn = styled.View `
@@ -177,7 +176,7 @@ export const ProductSubtotalContainer = styled.View `
     flex-direction : column;
     height : 150px;
     width : 97%;
-    background : #fff;
+    background : ${ props => props.theme.colors.background };
     elevation : 5;
     margin : 5px;
     justify-content : center;
@@ -186,18 +185,18 @@ export const ProductSubtotalContainer = styled.View `
 export const ProductSubtotalButton = styled(TouchableRipple) `
     width : 100%;
     height : 50px;
-    background : #fff;
+    background : ${ props => props.theme.colors.background };
     elevation : 2;
     border-width : 2px;
     display : flex;
     flex-direction: row;
     align-items : center;
-    border-color : #7d7;
+    border-color : ${ props => props.theme.colors.buy };
 `;
 export const ProductSubtotalLabel = styled.Text `
     font-family : 'Nunito_900Black_Italic';
     font-size : 16px;
-    color : #7d7;
+    color : ${ props => props.theme.colors.buy };
 `;
 export const ProductSubtotalNumberContainer = styled.View `
     display : flex;
@@ -209,7 +208,7 @@ export const ProductSubtotalNumberContainer = styled.View `
 `;
 export const ProductSubtotalMiniLabel = styled.Text `
     font-size : 18px;
-    color : #210124;
+    color : ${ props => props.theme.colors.text };
     font-family : 'Nunito_600SemiBold';
 `;
 export const ProductCalculateValueContainer = styled.View `
@@ -221,12 +220,12 @@ export const ProductCalculateValueContainer = styled.View `
 `;
 export const ProductPriceSubtotalBolder = styled.Text `
     font-size : 15px;
-    color : #24f;
+    color : ${ props => props.theme.colors.otherButtons };
     font-family : 'Nunito_600SemiBold';
 `;
 export const ProductPriceSubtotalNormal = styled.Text `
     font-size : 13px;
-    color : #24f;
+    color : ${ props => props.theme.colors.otherButtons };
     font-family : 'Nunito_600SemiBold';
 `;
 
@@ -244,7 +243,7 @@ export const ProductAddMoreButtonContainer = styled.View `
 export const ProductContinueButton = styled(TouchableRipple) `
     width : 100%;
     height : 50px;
-    background : #7d7;
+    background : ${ props => props.theme.colors.buy };
     display : flex;
     flex-direction : row;
     align-items : center;
@@ -255,7 +254,7 @@ export const ProductContinueButton = styled(TouchableRipple) `
 export const ProductContinueLabel = styled.Text `
     font-family : 'Nunito_900Black_Italic';
     font-size : 16px;
-    color : #fff;
+    color : ${ props => props.theme.colors.background };
 `;
 
 export const ProductAddMoreButton = styled(TouchableRipple) `
@@ -288,15 +287,15 @@ export const CarouselSuggestionCardExtraInformation = styled.View `
     display : flex;
     height : 275px;
     elevation : 2;
-    background : #fff;
+    background : ${ props => props.theme.colors.background };
     position : relative;
     align-items : center;
 `;
 
 export const SuggestionTitleText = styled(Text) `
     font-size : 18px;
-    color : #999;
-    background : #fff;
+    color : ${ props => props.theme.colors.label };
+    background : ${ props => props.theme.colors.background };
     margin-top : 20px;
     padding : 10px;
     font-family : 'Nunito_600SemiBold';
@@ -306,7 +305,7 @@ export const AddSuggestionToBagButton = styled(TouchableRipple) `
     width : 90%;
     height : 50px;
     margin : 5px;
-    background : #7d7;
+    background : ${ props => props.theme.colors.buy };
     position : absolute;
     bottom : 0;
     border-radius : 5px;
@@ -322,7 +321,7 @@ export const AddSuggestionToBagContent = styled.View `
 export const AddSuggestionToBagLabel = styled.Text `
     font-family : 'Nunito_900Black_Italic';
     font-size : 13px;
-    color : #fff;
+    color : ${ props => props.theme.colors.background };
 `;
 
 /**Depois botar em um component diferente */
@@ -360,7 +359,7 @@ export const ProductImageSuggestionCard = styled.Image `
 export const ProductLegend = styled(Text) `
     font-family : 'Nunito_900Black_Italic';
     font-size : 13px;
-    color : #888;
+    color : ${ props => props.theme.colors.label };
     margin : 0 10px;
 `;
 
@@ -378,7 +377,7 @@ export const ProductAccuracy = styled.View `
 export const ProductPrice = styled(Text) `
     font-family : 'Nunito_900Black_Italic';
     font-size : 14px;
-    color : #210124;
+    color : ${ props => props.theme.colors.text };
     align-self : flex-start;
     margin-left : 10px;
 `;
@@ -386,7 +385,7 @@ export const ProductPrice = styled(Text) `
 export const ProductPricePeace = styled(Text) `
     font-family : 'Nunito_600SemiBold';
     font-size : 12px;
-    color : #888;
+    color : ${ props => props.theme.colors.label };
     align-self : flex-start;
     margin-left : 10px;
 `;
@@ -406,9 +405,9 @@ export const ProductCircle = styled.View `
     border-radius : 100px;
     border-bottom-right-radius : 20px;
     border-bottom-left-radius : 20px;
-    background : #bef;
+    background : ${ props => props.theme.colors.primary };
     border : 2px;
-    border-color : #bff;
+    border-color : ${ props => props.theme.colors.quaternary };
     z-index : -1;
 `;
 export const ProductCircleTop = styled.View `
@@ -420,20 +419,8 @@ export const ProductCircleTop = styled.View `
     border-radius : 100px;
     border-top-right-radius : 20px;
     border-top-left-radius : 20px;
-    background : #def;
+    background : ${ props => props.theme.colors.secundary};
     border : 2px;
-    border-color : #ccc;
+    border-color : ${ props => props.theme.colors.labelButton };
     z-index : -1;
 `;
-
-/*export const InfoProductTitle = styled.Text `
-    font-family : 'Nunito_900Black_Italic';
-    font-size : 15px;
-    color : #210124;
-`;
-export const InfoProductFeedbackText = styled.Text `
-    font-size : 11px;
-    color : #777;
-    font-family : 'Nunito_600SemiBold';
-    margin-left : 10px;
-`;*/

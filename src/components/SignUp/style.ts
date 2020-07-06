@@ -61,3 +61,10 @@ export const UploadLabel = styled.Text `
     color : #000;
 `;
 
+export const Loading = styled.ActivityIndicator.attrs({
+    size : 'small',
+    color : '#999'
+}) `
+    margin : 30px 0;
+`;
+

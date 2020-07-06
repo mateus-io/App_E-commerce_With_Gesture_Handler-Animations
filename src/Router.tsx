@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import {
     createDrawerNavigator
@@ -14,7 +14,11 @@ import ViewProduct from './pages/ViewProduct';
 import Bag from './pages/Bag';
 import Favorites from './pages/Favorites';
 import DrawerContent from './components/DrawerContent';
-import { AppProvider } from './context';
+
+import { ThemeProvider } from 'styled-components/native';
+import light from './styles/themes/light';
+
+import { AppContext } from './context';
 
 
 const Drawer = createDrawerNavigator();
@@ -22,34 +26,36 @@ const Drawer = createDrawerNavigator();
 const { Navigator, Screen } = Drawer;
 
 const Router = () => {
+    const { state } = useContext(AppContext);
     return (
-        <AppProvider>
-            <NavigationContainer>
-                <Navigator drawerContent={ (props : any) => <DrawerContent {...props} /> } initialRouteName="Home">
-                    <Screen name="Home" component={ 
-                        Home                    
-                    }/>
-                    <Screen name="Contacts" component={
-                        Contacts
-                    }/>
-                    <Screen name="DashBoard" component={
-                        DashBoard
-                    }/>
-                    <Screen name="Categories" component={
-                        Categories
-                    }/>
-                    <Screen name="ViewProduct" component={
-                        ViewProduct
-                    }/>
-                    <Screen name="Bag" component={
-                        Bag
-                    }/>
-                    <Screen name="Favorites" component={
-                        Favorites
-                    }/>
-                </Navigator>
-            </NavigationContainer>
-        </AppProvider>
+        
+            <ThemeProvider theme={state.theme}>
+                <NavigationContainer>
+                    <Navigator drawerContent={ (props : any) => <DrawerContent {...props} /> } initialRouteName="Home">
+                        <Screen name="Home" component={ 
+                            Home                    
+                        }/>
+                        <Screen name="Contacts" component={
+                            Contacts
+                        }/>
+                        <Screen name="DashBoard" component={
+                            DashBoard
+                        }/>
+                        <Screen name="Categories" component={
+                            Categories
+                        }/>
+                        <Screen name="ViewProduct" component={
+                            ViewProduct
+                        }/>
+                        <Screen name="Bag" component={
+                            Bag
+                        }/>
+                        <Screen name="Favorites" component={
+                            Favorites
+                        }/>
+                    </Navigator>
+                </NavigationContainer>
+            </ThemeProvider>
         
     );
 }

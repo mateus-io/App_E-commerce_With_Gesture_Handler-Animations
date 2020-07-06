@@ -7,7 +7,8 @@ import {
     SelectProfilePictureContainer,
     SelectProfilePictureTouchable,
     SelectedProfilePicturePreview,
-    UploadLabel
+    UploadLabel,
+    Loading
 } from './style';
 
 import * as ImagePicker from 'expo-image-picker';
@@ -28,8 +29,6 @@ import { Feather } from '@expo/vector-icons';
 
 import ErrorComponent from '../ErrorComponent';
 
-import SignIn from '../SignIn';
-
 import api from '../../api/api';
 
 interface SignUpProps {
@@ -46,8 +45,7 @@ const SignUp : React.FC<SignUpProps> = ({navigate, route, setActiveSignUp}) => {
     const [userName, setUsername] = useState("");
     const [profile_picture_url, setProfile_picture_url] = useState("");
     const [actveErrorAlert, setActiveErrorAlert] = useState(false);
-    
-    //profile_picture_url
+    const [loading, setLoading] = useState(false);
 
     useEffect( () => {
         Animated.spring(offset.y, {
@@ -75,6 +73,7 @@ const SignUp : React.FC<SignUpProps> = ({navigate, route, setActiveSignUp}) => {
     }
 
     async function handleSignUp(){
+        setLoading(true);
         try {
             await api.post('/users', {
                 email, 
@@ -84,10 +83,10 @@ const SignUp : React.FC<SignUpProps> = ({navigate, route, setActiveSignUp}) => {
             });
             setActiveSignUp(false);
             navigate(route);
-            
         } catch {
             setActiveErrorAlert(true);
         }
+        setLoading(false);
     }
 
     return (
@@ -95,6 +94,9 @@ const SignUp : React.FC<SignUpProps> = ({navigate, route, setActiveSignUp}) => {
             onPress={ () => Keyboard.dismiss()}
         >
             <ContentContainer>
+                    {
+                        loading ? <Loading/> : <></>
+                    }
                     <ErrorComponent
                         errorMessage="Erro no cadastro!!!"
                         activeErrorAlert={actveErrorAlert}

@@ -8,7 +8,7 @@ export const Container = styled(Animated.View) `
     left : 0;
     width : 100%;
     height : 100%;
-    background : #bef;
+    background : ${ props => props.theme.colors.primary };
     display : flex;
     align-items : center;
     justify-content : center;

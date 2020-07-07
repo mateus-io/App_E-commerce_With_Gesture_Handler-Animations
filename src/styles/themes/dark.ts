@@ -1,5 +1,6 @@
 export default {
     title : 'dark',
+    placeholder : '#fff',
     
     colors : {
         primary : '#3C7A89',

@@ -43,6 +43,8 @@ import ErrorComponent from '../ErrorComponent';
 
 import { AppContext } from '../../context';
 
+import { ThemeContext } from 'styled-components/native';
+
 interface Permissions {
     type : string;
     token : string;
@@ -63,8 +65,9 @@ const SignIn : React.FC<SignInProps> = ({navigate}) => {
     const [activeErrorAlert, setActiveErrorAlert] = useState(false);
     const [activeSignUp, setActiveSignUp] = useState(false);
     const [loading, setLoading] = useState(false);
-    const { state } = useContext(AppContext);
 
+    const { state } = useContext(AppContext);
+    const { colors } = useContext(ThemeContext);
 
     useEffect( () => {
         if(openKeyboard){
@@ -84,9 +87,6 @@ const SignIn : React.FC<SignInProps> = ({navigate}) => {
             }).start();
         }
     }, [openKeyboard] );
-
-    
-
 
     async function handleSignInWithGoogle() {
         setLoading(true);
@@ -248,9 +248,12 @@ const SignIn : React.FC<SignInProps> = ({navigate}) => {
                             value={email}
                             onChangeText={setEmail}
                             mode='outlined'
-                            underlineColor='#25f'
+                            underlineColor={colors.otherButtons}
+                            selectionColor={colors.otherButtons}
+                            theme={state.theme}
                             numberOfLines={1}
                             autoCorrect={false}
+                            placeholderTextColor={colors.text}
                             onFocus={ () => setOpenKeyboard(true) }
                         />
 
@@ -259,9 +262,12 @@ const SignIn : React.FC<SignInProps> = ({navigate}) => {
                             value={password}
                             onChangeText={setPassword}
                             mode='outlined'
-                            selectionColor='#25f'
+                            theme={state.theme}
+                            underlineColor={colors.otherButtons}
+                            selectionColor={colors.otherButtons}
                             numberOfLines={1}
                             autoCorrect={false}
+                            placeholderTextColor={colors.text}
                             onFocus={ () => setOpenKeyboard(true) }
                         />
 

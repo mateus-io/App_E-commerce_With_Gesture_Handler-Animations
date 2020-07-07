@@ -20,9 +20,9 @@ export const Menu = styled.ScrollView `
 export const MenuItem = styled.View `
     width : 150px;
     height : 50px;
-    background : #dff;
+    background : ${ props => props.theme.colors.secundary};
     border-width : 1px;
-    border-color : #def;
+    border-color : ${ props => props.theme.colors.labelButton};
     border-top-left-radius : 25px;
     border-top-right-radius : 25px;
 `;
@@ -43,15 +43,15 @@ export const MenuItemContent = styled.View `
 `;
 
 export const MenuItemTitle = styled.Text `
-    font-family : 'Nunito_600SemiBold';
+    font-family : 'Nunito_900Black_Italic';
     font-size : 15px;
-    color : #999;
+    color : ${ props => props.theme.colors.text};
     text-align : center;
 `;
 
 export const AnimationBar = styled(Animated.View) `
     height : 4px;
-    background : #ddd;
+    background : ${ props => props.theme.colors.primary};
     width : 150px;
     position : absolute;
     bottom : 0px;

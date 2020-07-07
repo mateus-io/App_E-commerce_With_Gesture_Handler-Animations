@@ -7,14 +7,14 @@ export const Container = styled.View `
     flex-direction : row;
     flex-wrap : wrap;
     height : 200px;
-    background : #bef;
+    background : ${ props => props.theme.colors.primary };
     margin-top : 100px;
 `;
 
 
 export const WelcomeImageContainerWrapper = styled(Animated.View) `
     flex : 1;
-    background : #dff;
+    background : ${ props => props.theme.colors.secundary };
     display : flex;
     flex-direction : column;
     justify-content : center;
@@ -33,20 +33,20 @@ export const WelcomeImageContainer = styled.View `
     height : 100%;
     display : flex;
     position : relative;
-    background : #bef;
+    background : ${ props => props.theme.colors.primary };
 
 `;
 export const WelcomeMainText = styled.Text `
     font-family : 'Nunito_900Black_Italic';
     font-size : 20px;
-    color : #210124;
+    color : ${ props => props.theme.colors.text };
     text-align : center;
 `;
 
 
 
 export const MainTextContainerReverse = styled.View `
-    background : #bef;
+    background : ${ props => props.theme.colors.primary };
     border-radius : 20px;
     padding : 10px;
     margin : 10px;
@@ -58,7 +58,7 @@ export const MainTextContainerReverse = styled.View `
 export const WrapperContainer = styled.View `
     display : flex;
     height : 100%;
-    background : #DFF;
+    background : ${ props => props.theme.colors.secundary };
     margin : 10px 0;
 `;
 
@@ -84,7 +84,7 @@ export const BottomWave = styled(SvgXml) `
 export const CardItem = styled.View `
     height : 150px;
     width : 150px;
-    background : #fff;
+    background : ${ props => props.theme.colors.background };
     border-radius : 20px;
     margin : 10px;
     position : relative;
@@ -93,7 +93,7 @@ export const CardItem = styled.View `
     justify-content : center;
     elevation : 10;
     border-bottom-width : 10px ;
-    border-bottom-color : #bef;
+    border-bottom-color : ${ props => props.theme.colors.primary };
     box-shadow : 10px 5px 5px  black;
 `;
 
@@ -104,7 +104,7 @@ export const BubbleBigger = styled.View `
     overflow : hidden;
     width : 150px;
     height : 150px;
-    background : #bef;
+    background : ${ props => props.theme.colors.primary };
     border-radius : 75px;
 `;
 
@@ -143,18 +143,18 @@ import {
 export const ShopTextTitle = styled(Text) `
     font-family : 'Nunito_900Black_Italic';
     font-size : 20px;
-    color : #210124;
+    color : ${ props => props.theme.colors.text };
     text-align : center;
 `;
 export const ShopTextSubTitle = styled(Text) `
     font-size : 13px;
     font-family : 'Nunito_900Black_Italic';
-    color : #888;
+    color : ${ props => props.theme.colors.label };
     text-align : center;
 `;
 
 export const MenuText = styled.Text `
     font-family : 'Nunito_900Black_Italic';
     font-size : 20px;
-    color : #210124;
+    color : ${ props => props.theme.colors.text };
 `;

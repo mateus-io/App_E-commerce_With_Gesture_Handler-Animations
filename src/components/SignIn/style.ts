@@ -9,6 +9,7 @@ const width = Dimensions.get('window').width;
 
 export const Container = styled.TouchableWithoutFeedback `
     flex : 1;
+    background : ${props => props.theme.colors.background};
 `;
 export const ContentContainer = styled.View `
     height : ${ Math.floor(height) }px;
@@ -18,6 +19,7 @@ export const ContentContainer = styled.View `
     align-items : center;
     justify-content : center;
     position : relative;
+    background : ${props => props.theme.colors.background};
 `;
 
 export const SignInBox = styled(Animated.View) `
@@ -28,7 +30,8 @@ export const SignInBox = styled(Animated.View) `
     flex-direction : column;
     justify-content : center;
     border-top-width : ${ StyleSheet.hairlineWidth }px;
-    border-top-color : #ccc;
+    border-top-color : ${props => props.theme.colors.labelButton};
+    background : ${props => props.theme.colors.secundary};
 `;
 
 
@@ -79,7 +82,7 @@ export const SignInWithFacebookContent = styled.View `
 `;
 
 export const SignInIconContainer = styled.View `
-    background: #fff;
+    background: ${props => props.theme.colors.background};
     border-radius : 2px;
     width: 40px;
     height: 40px;
@@ -107,16 +110,17 @@ export const SignInText = styled.Text `
 export const SignUpContainer = styled.TouchableWithoutFeedback `
     width : 300px;
     height : 20px;
+    
 `;
 export const SignUpLabel = styled.Text `
-    color: #24f;
+    color: ${props => props.theme.colors.text};
     font-size: 11px;
     letter-spacing : 0.2px;
     font-family : 'Nunito_600SemiBold';
     text-align : center;
     padding-bottom : 10px;
     border-bottom-width : ${ StyleSheet.hairlineWidth }px;
-    border-bottom-color : #ccc;
+    border-bottom-color : ${props => props.theme.colors.labelButton};
 `;
 
 export const Loading = styled.ActivityIndicator.attrs({

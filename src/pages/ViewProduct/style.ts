@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 export const Container = styled.ScrollView `
     flex : 1;
     display : flex;
-    background : white;
+    background : ${ props => props.theme.colors.background };
     position : relative;
     flex-direction : column;
 `;
@@ -15,3 +15,5 @@ export const ContentContainer = styled.View `
     margin : 0 auto;
     width : 100%;
 `;
+
+

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import {
     Container,
@@ -29,7 +29,11 @@ import { Feather } from '@expo/vector-icons';
 
 import ErrorComponent from '../ErrorComponent';
 
+import { ThemeContext } from 'styled-components/native';
+
 import api from '../../api/api';
+
+import { AppContext } from '../../context';
 
 interface SignUpProps {
     navigate(route : string) : void;
@@ -46,6 +50,9 @@ const SignUp : React.FC<SignUpProps> = ({navigate, route, setActiveSignUp}) => {
     const [profile_picture_url, setProfile_picture_url] = useState("");
     const [actveErrorAlert, setActiveErrorAlert] = useState(false);
     const [loading, setLoading] = useState(false);
+
+    const { colors } = useContext(ThemeContext);
+    const { state } = useContext(AppContext);
 
     useEffect( () => {
         Animated.spring(offset.y, {
@@ -118,9 +125,12 @@ const SignUp : React.FC<SignUpProps> = ({navigate, route, setActiveSignUp}) => {
                             value={email}
                             onChangeText={setEmail}
                             mode='outlined'
-                            underlineColor='#25f'
+                            theme={state.theme}
+                            underlineColor={colors.otherButtons}
+                            selectionColor={colors.otherButtons}
                             numberOfLines={1}
                             autoCorrect={false}
+                            placeholderTextColor={colors.text}
                             style={{
                                 marginTop : 5
                             }}
@@ -131,9 +141,12 @@ const SignUp : React.FC<SignUpProps> = ({navigate, route, setActiveSignUp}) => {
                             value={password}
                             onChangeText={setPassword}
                             mode='outlined'
-                            selectionColor='#25f'
+                            theme={state.theme}
+                            underlineColor={colors.otherButtons}
+                            selectionColor={colors.otherButtons}
                             numberOfLines={1}
                             autoCorrect={false}
+                            placeholderTextColor={colors.text}
                             style={{
                                 marginTop : 5
                             }}
@@ -144,9 +157,12 @@ const SignUp : React.FC<SignUpProps> = ({navigate, route, setActiveSignUp}) => {
                             value={userName}
                             onChangeText={setUsername}
                             mode='outlined'
-                            selectionColor='#25f'
+                            underlineColor={colors.otherButtons}
+                            selectionColor={colors.otherButtons}
                             numberOfLines={1}
                             autoCorrect={false}
+                            theme={state.theme}
+                            placeholderTextColor={colors.text}
                             style={{
                                 marginTop : 5,
                                 marginBottom : 10
@@ -177,7 +193,7 @@ const SignUp : React.FC<SignUpProps> = ({navigate, route, setActiveSignUp}) => {
                             <Feather
                                 name="upload-cloud"
                                 size={40}
-                                color="#000"
+                                color={colors.text}
                             />
                         </SelectProfilePictureTouchable>
 

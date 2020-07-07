@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { 
     Container, 
@@ -30,11 +30,9 @@ const { ScrollView } = Animated;
 import { PanGestureHandler, State } from 'react-native-gesture-handler';
 import { TouchableRipple } from 'react-native-paper';
 
-const xml =  `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -120 1440 320">
-        <path fill="#beef" d="M0,64L24,80C48,96,96,128,144,122.7C192,117,240,75,288,80C336,85,384,139,432,170.7C480,203,528,213,576,181.3C624,149,672,75,720,58.7C768,43,816,85,864,90.7C912,96,960,64,1008,69.3C1056,75,1104,117,1152,128C1200,139,1248,117,1296,96C1344,75,1392,53,1416,42.7L1440,32L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z"></path>
-    </svg>
-`;
+import { ThemeContext } from 'styled-components/native';
+
+
 
 interface WelcomeContainerProps {
     navigation : any;
@@ -43,6 +41,14 @@ interface WelcomeContainerProps {
 const WelcomeContainer : React.FC<WelcomeContainerProps> = ({ navigation }) => {
     let offset = 0;
     const translateX = new Animated.Value(0);
+
+    const { colors } = useContext(ThemeContext);
+
+    const xml =  `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -120 1440 320">
+            <path fill=${colors.background} d="M0,64L24,80C48,96,96,128,144,122.7C192,117,240,75,288,80C336,85,384,139,432,170.7C480,203,528,213,576,181.3C624,149,672,75,720,58.7C768,43,816,85,864,90.7C912,96,960,64,1008,69.3C1056,75,1104,117,1152,128C1200,139,1248,117,1296,96C1344,75,1392,53,1416,42.7L1440,32L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z"></path>
+        </svg>
+    `;
 
     const animateEvent = Animated.event(
         [
@@ -98,6 +104,7 @@ const WelcomeContainer : React.FC<WelcomeContainerProps> = ({ navigation }) => {
                     <Feather
                         name="anchor"
                         size={40}
+                        color={colors.text}
                     />
                     <WelcomeMainText>
                         Shop
@@ -105,6 +112,7 @@ const WelcomeContainer : React.FC<WelcomeContainerProps> = ({ navigation }) => {
                     <Feather
                         name="anchor"
                         size={40}
+                        color={colors.text}
                     />
                 </MainTextContainerReverse>
                 <ScrollView horizontal>

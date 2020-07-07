@@ -6,7 +6,7 @@ export const ButtonContainer = styled.View `
     flex-direction : row;
     width : 300px;
     height : 50px;
-    margin : 0 auto;
+    margin : 10px auto;
 `;
 
 interface BoxIconProps {

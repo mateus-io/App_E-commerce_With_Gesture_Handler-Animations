@@ -4,12 +4,13 @@ import React, {
     ForwardRefRenderFunction, 
     useRef,
     forwardRef,
-    useImperativeHandle
+    useImperativeHandle,
+    useContext
 } from 'react';
 
 
 
-import { View, Dimensions, TouchableOpacity, ScrollView, Animated } from 'react-native';
+import { Dimensions, ScrollView, Animated } from 'react-native';
 
 import {
     ContainerScroll,
@@ -66,11 +67,29 @@ import { PanGestureHandler, State } from 'react-native-gesture-handler';
 
 import ImagesWrapper from '../ImagesWrapper';
 
-const Component1 : React.FC = () => {
+import { ThemeContext } from 'styled-components/native';
+
+type Product = {
+    id : number;
+    title : string;
+    main_image_url : string;
+    images_url : string;
+    assessments : number;
+    price : number;
+    plots : string;
+}
+
+interface SpecProductProps {
+    product : Product;
+}
+
+const Component1 : React.FC<SpecProductProps> = ({ product }) => {
     const scrollViewRef = useRef<ImperativeScrollViewHandles>(null);
     const scrollViewRefSuggestions = useRef<ImperativeScrollViewHandles>(null);
     const scrollViewRefLikedToo = useRef<ImperativeScrollViewHandles>(null);
     const [indexImage, setIndexImage] = useState(0);
+
+    const { colors } = useContext(ThemeContext);
 
     let offset = 0;
     const translateX = new Animated.Value(0);
@@ -210,24 +229,35 @@ const Component1 : React.FC = () => {
                 <ShowInfoProductContainer>
                     <InfoProductContainer>
                         <InfoProductTitle>
-                            Smartphone Samsung Galaxy A30s 64GB Branco 4G - 4GB RAM Tela 6,4" Câm. Tripla + Câm Selfie 16MP
+                            {product.title}
                         </InfoProductTitle>
                         <InfoProductStatusBar>
 
                             <InfoProductFeedbackContainer>
-                                <Feather name="anchor" size={12} color="black"/>
-                                <Feather name="anchor" size={12} color="black"/>
-                                <Feather name="anchor" size={12} color="black"/>
-                                <Feather name="anchor" size={12} color="black"/>
-                                <Feather name="anchor" size={12} color="black"/>
+                                {
+                                
+                                    product.assessments >= 1 ? <Feather name="anchor" size={20} color={colors.text}/> : <></>
+                                }
+                                {
+                                    product.assessments >= 2 ? <Feather name="anchor" size={20} color={colors.text}/> : <></>
+                                }
+                                {
+                                    product.assessments >= 3 ? <Feather name="anchor" size={20} color={colors.text}/> : <></>
+                                }
+                                {
+                                    product.assessments >= 4 ? <Feather name="anchor" size={20} color={colors.text}/> : <></>
+                                }
+                                {
+                                    product.assessments >= 5 ? <Feather name="anchor" size={20} color={colors.text}/> : <></>
+                                }
                                 <InfoProductFeedbackText>
-                                    3.7(87)
+                                    {`${product.assessments}`} (87)
                                 </InfoProductFeedbackText>
                             </InfoProductFeedbackContainer>
 
                             <InfoProductIconsContainer>
-                                <Feather name="share" size={20} color="black"/>
-                                <Feather name="star" size={20} color="black"/>
+                                <Feather name="share" size={25} color={colors.text}/>
+                                <Feather name="star" size={25} color={colors.text}/>
                             </InfoProductIconsContainer>
 
                         </InfoProductStatusBar>
@@ -244,19 +274,21 @@ const Component1 : React.FC = () => {
 
                         <InfoProductPriceContainer>
                             <InfoProductLineThroughText>
-                                R$ 1.099,00
+                                R$ {`${product.price + 200}`}
                             </InfoProductLineThroughText>
 
                             <InfoProductNormalText>
-                                R$ 999,90
+                                R$ {`${product.price}`}
                             </InfoProductNormalText>
 
                             <InfoProductNormalText>
-                                10x de R$ 99,90 sem juros
+                                {`${product.plots}`} de R$ {`${
+                                    Math.round(product.price * 1.0 / Number(product.plots.replace('x', '') )).toFixed(2).toString().replace('.', ',')
+                                    }`} sem juros
                             </InfoProductNormalText>
 
                             <InfoProductPriceMainText>
-                                R$ 929,07 
+                                R$ {`${product.price.toString().replace('.',',')}`} 
                                 <InfoProductFeedbackTextBolder>
                                     à vista
                                 </InfoProductFeedbackTextBolder>
@@ -267,7 +299,7 @@ const Component1 : React.FC = () => {
                                 onPress={ () => {} }
                             >
                                 <PurchaseButtonContent>
-                                    <Feather name="shopping-bag" size={20} color="white"/>
+                                    <Feather name="shopping-bag" size={20} color={colors.background}/>
 
                                     <InfoProductPurchaseText>
                                         Comprar agora
@@ -282,7 +314,7 @@ const Component1 : React.FC = () => {
                                 onPress={ () => {} }
                             >
                                 <PurchaseButtonContent>
-                                    <Feather name="shopping-bag" size={20} color="#0f0"/>
+                                    <Feather name="shopping-bag" size={20} color={colors.buy}/>
 
                                     <InfoProductAddBagText>
                                         Adicionar à sacola
@@ -333,11 +365,11 @@ const Component1 : React.FC = () => {
                                                     SmartPhone Motorola G8 Play  kljdsalkfj sdkjflak jfdklajf
                                                 </ProductLegend>
                                                 <ProductAccuracy>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
                                                 </ProductAccuracy>
                                                 <ProductPrice>
                                                     R$ 200,00
@@ -347,7 +379,7 @@ const Component1 : React.FC = () => {
                                                 </ProductPricePeace>
 
                                                 <ProductStarComponent rippleColor="transparent" onPress={() => {}}>
-                                                    <Feather name="star" size={20} color="black"/>
+                                                    <Feather name="star" size={20} color={colors.text}/>
                                                 </ProductStarComponent>
                                                 <ProductCircle/>
                                                 <ProductCircleTop/>
@@ -365,11 +397,11 @@ const Component1 : React.FC = () => {
                                                     SmartPhone Motorola G8 Play  kljdsalkfj sdkjflak jfdklajf
                                                 </ProductLegend>
                                                 <ProductAccuracy>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
                                                 </ProductAccuracy>
                                                 <ProductPrice>
                                                     R$ 200,00
@@ -379,7 +411,7 @@ const Component1 : React.FC = () => {
                                                 </ProductPricePeace>
 
                                                 <ProductStarComponent rippleColor="transparent" onPress={() => {}}>
-                                                    <Feather name="star" size={20} color="black"/>
+                                                    <Feather name="star" size={20} color={colors.text}/>
                                                 </ProductStarComponent>
                                                 <ProductCircle/>
                                                 <ProductCircleTop/>
@@ -397,11 +429,11 @@ const Component1 : React.FC = () => {
                                                     SmartPhone Motorola G8 Play  kljdsalkfj sdkjflak jfdklajf
                                                 </ProductLegend>
                                                 <ProductAccuracy>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
                                                 </ProductAccuracy>
                                                 <ProductPrice>
                                                     R$ 200,00
@@ -411,7 +443,7 @@ const Component1 : React.FC = () => {
                                                 </ProductPricePeace>
 
                                                 <ProductStarComponent rippleColor="transparent" onPress={() => {}}>
-                                                    <Feather name="star" size={20} color="black"/>
+                                                    <Feather name="star" size={20} color={colors.text}/>
                                                 </ProductStarComponent>
                                                 <ProductCircle/>
                                                 <ProductCircleTop/>
@@ -450,11 +482,11 @@ const Component1 : React.FC = () => {
                                                     SmartPhone Motorola G8 Play  kljdsalkfj sdkjflak jfdklajf
                                                 </ProductLegend>
                                                 <ProductAccuracy>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
                                                 </ProductAccuracy>
                                                 <ProductPrice>
                                                     R$ 200,00
@@ -464,7 +496,7 @@ const Component1 : React.FC = () => {
                                                 </ProductPricePeace>
 
                                                 <ProductStarComponent rippleColor="transparent" onPress={() => {}}>
-                                                    <Feather name="star" size={20} color="black"/>
+                                                    <Feather name="star" size={20} color={colors.text}/>
                                                 </ProductStarComponent>
                                                 <ProductCircle/>
                                                 <ProductCircleTop/>
@@ -482,11 +514,11 @@ const Component1 : React.FC = () => {
                                                     SmartPhone Motorola G8 Play  kljdsalkfj sdkjflak jfdklajf
                                                 </ProductLegend>
                                                 <ProductAccuracy>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
                                                 </ProductAccuracy>
                                                 <ProductPrice>
                                                     R$ 200,00
@@ -496,7 +528,7 @@ const Component1 : React.FC = () => {
                                                 </ProductPricePeace>
 
                                                 <ProductStarComponent rippleColor="transparent" onPress={() => {}}>
-                                                    <Feather name="star" size={20} color="black"/>
+                                                    <Feather name="star" size={20} color={colors.text}/>
                                                 </ProductStarComponent>
                                                 <ProductCircle/>
                                                 <ProductCircleTop/>
@@ -514,11 +546,11 @@ const Component1 : React.FC = () => {
                                                     SmartPhone Motorola G8 Play  kljdsalkfj sdkjflak jfdklajf
                                                 </ProductLegend>
                                                 <ProductAccuracy>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
                                                 </ProductAccuracy>
                                                 <ProductPrice>
                                                     R$ 200,00
@@ -528,7 +560,7 @@ const Component1 : React.FC = () => {
                                                 </ProductPricePeace>
 
                                                 <ProductStarComponent rippleColor="transparent" onPress={() => {}}>
-                                                    <Feather name="star" size={20} color="black"/>
+                                                    <Feather name="star" size={20} color={colors.text}/>
                                                 </ProductStarComponent>
                                                 <ProductCircle/>
                                                 <ProductCircleTop/>
@@ -563,7 +595,7 @@ import {
     AddProductBagText
 } from './style';
 
-const Component2 : React.FC = () => {
+const Component2 : React.FC<SpecProductProps> = ({ product }) => {
     return(
         <SpecsContainerGeneral>
             <SpecsContainerFixed>
@@ -701,9 +733,9 @@ import { ProgressBar, Colors } from 'react-native-paper';
 
 import { Modal } from 'react-native';
 
-const Component3 : React.FC = () => {
+const Component3 : React.FC<SpecProductProps> = ({ product }) => {
     const [modalOpen, setModalOpen] = useState(false);
-
+    const { colors } = useContext(ThemeContext); 
     return(
         <FeedbacksContainer>
             <FeedbacksContainerFixed>
@@ -725,7 +757,7 @@ const Component3 : React.FC = () => {
                                     rippleColor="#ccc"
                                 >
                                     <ModalItemRow>
-                                        <Feather name="check-circle" size={16} color="#55f"/>
+                                        <Feather name="check-circle" size={16} color={colors.otherButtons}/>
                                         <ModalSecondaryText>
                                             Relevância
                                         </ModalSecondaryText>
@@ -736,7 +768,7 @@ const Component3 : React.FC = () => {
                                     rippleColor="#ccc"
                                 >
                                     <ModalItemRow>
-                                        <Feather name="circle" size={16} color="#ccc"/>
+                                        <Feather name="circle" size={16} color={colors.labelButton}/>
                                         <ModalSecondaryText>
                                             Mais úteis
                                         </ModalSecondaryText>
@@ -748,7 +780,7 @@ const Component3 : React.FC = () => {
                                     rippleColor="#ccc"
                                 >
                                     <ModalItemRow>
-                                        <Feather name="circle" size={16} color="#ccc"/>
+                                        <Feather name="circle" size={16} color={colors.labelButton}/>
                                         <ModalSecondaryText>
                                             Mais recentes
                                         </ModalSecondaryText>
@@ -759,7 +791,7 @@ const Component3 : React.FC = () => {
                                     rippleColor="#ccc"
                                 >
                                     <ModalItemRow>
-                                        <Feather name="circle" size={16} color="#ccc"/>
+                                        <Feather name="circle" size={16} color={colors.labelButton}/>
                                         <ModalSecondaryText>
                                             Melhores avaliações
                                         </ModalSecondaryText>
@@ -771,7 +803,7 @@ const Component3 : React.FC = () => {
                                     rippleColor="#ccc"
                                 >
                                     <ModalItemRow>
-                                        <Feather name="circle" size={16} color="#ccc"/>
+                                        <Feather name="circle" size={16} color={colors.labelButton}/>
                                         <ModalSecondaryText>
                                             Piores avaliações
                                         </ModalSecondaryText>
@@ -793,11 +825,11 @@ const Component3 : React.FC = () => {
                             </MainFeedbackTextContainer>
                             <ShowFeedbacksIconsContainer>
                                 <ShowFeedbacksIconsRow>
-                                    <Feather name="anchor" size={30} color="black"/>
-                                    <Feather name="anchor" size={30} color="black"/>
-                                    <Feather name="anchor" size={30} color="black"/>
-                                    <Feather name="anchor" size={30} color="black"/>
-                                    <Feather name="anchor" size={30} color="black"/>
+                                    <Feather name="anchor" size={30} color={colors.text}/>
+                                    <Feather name="anchor" size={30} color={colors.text}/>
+                                    <Feather name="anchor" size={30} color={colors.text}/>
+                                    <Feather name="anchor" size={30} color={colors.text}/>
+                                    <Feather name="anchor" size={30} color={colors.text}/>
                                 </ShowFeedbacksIconsRow>
                                 <QuantFeedbacksText>
                                     87 avaliações
@@ -838,7 +870,7 @@ const Component3 : React.FC = () => {
                             rippleColor="#999"
                         >
                             <FiltersContent>
-                                <Feather name="align-left" size={20} color="#aaa"/>
+                                <Feather name="align-left" size={20} color={colors.labelButton}/>
                                 <FiltersText>
                                     Ordenar por : Relevância
                                 </FiltersText>
@@ -848,11 +880,11 @@ const Component3 : React.FC = () => {
                         <CommentsContainer>
                             <CommentsItemContainer>
                                 <ShowFeedbacksIconsRow>
-                                    <Feather name="anchor" size={25} color="black"/>
-                                    <Feather name="anchor" size={25} color="black"/>
-                                    <Feather name="anchor" size={25} color="black"/>
-                                    <Feather name="anchor" size={25} color="black"/>
-                                    <Feather name="anchor" size={25} color="black"/>
+                                    <Feather name="anchor" size={25} color={colors.text}/>
+                                    <Feather name="anchor" size={25} color={colors.text}/>
+                                    <Feather name="anchor" size={25} color={colors.text}/>
+                                    <Feather name="anchor" size={25} color={colors.text}/>
+                                    <Feather name="anchor" size={25} color={colors.text}/>
                                 </ShowFeedbacksIconsRow>
                                 <CommentsText>
                                     Mateu Apolinário da silva
@@ -875,11 +907,11 @@ const Component3 : React.FC = () => {
 
                             <CommentsItemContainer>
                                 <ShowFeedbacksIconsRow>
-                                    <Feather name="anchor" size={25} color="black"/>
-                                    <Feather name="anchor" size={25} color="black"/>
-                                    <Feather name="anchor" size={25} color="black"/>
-                                    <Feather name="anchor" size={25} color="black"/>
-                                    <Feather name="anchor" size={25} color="black"/>
+                                    <Feather name="anchor" size={25} color={colors.text}/>
+                                    <Feather name="anchor" size={25} color={colors.text}/>
+                                    <Feather name="anchor" size={25} color={colors.text}/>
+                                    <Feather name="anchor" size={25} color={colors.text}/>
+                                    <Feather name="anchor" size={25} color={colors.text}/>
                                 </ShowFeedbacksIconsRow>
                                 <CommentsText>
                                     Mateus Apolinário da silva
@@ -902,11 +934,11 @@ const Component3 : React.FC = () => {
 
                             <CommentsItemContainer>
                                 <ShowFeedbacksIconsRow>
-                                    <Feather name="anchor" size={25} color="black"/>
-                                    <Feather name="anchor" size={25} color="black"/>
-                                    <Feather name="anchor" size={25} color="black"/>
-                                    <Feather name="anchor" size={25} color="black"/>
-                                    <Feather name="anchor" size={25} color="black"/>
+                                    <Feather name="anchor" size={25} color={colors.text}/>
+                                    <Feather name="anchor" size={25} color={colors.text}/>
+                                    <Feather name="anchor" size={25} color={colors.text}/>
+                                    <Feather name="anchor" size={25} color={colors.text}/>
+                                    <Feather name="anchor" size={25} color={colors.text}/>
                                 </ShowFeedbacksIconsRow>
                                 <CommentsText>
                                     Mateus Apolinário da silva
@@ -970,9 +1002,10 @@ import {
 } from './style';
 
 import { Checkbox } from 'react-native-paper';
+import { color } from 'react-native-reanimated';
 
-const Component4 : React.FC = () => {
-
+const Component4 : React.FC<SpecProductProps> = ({ product }) => {
+    const { colors } = useContext(ThemeContext);
     return (
         <PurchaseTogetherContainer>
             <PurchaseTogetherContainerFixed>
@@ -994,11 +1027,11 @@ const Component4 : React.FC = () => {
                                 </PurchaseTogetherProductTitle>
                                 <PurchaseTogetherProductIconsRowContainer>
 
-                                    <Feather name="anchor" size={12} color="black"/>
-                                    <Feather name="anchor" size={12} color="black"/>
-                                    <Feather name="anchor" size={12} color="black"/>
-                                    <Feather name="anchor" size={12} color="black"/>
-                                    <Feather name="anchor" size={12} color="black"/>
+                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                    <Feather name="anchor" size={12} color={colors.text}/>
 
                                 </PurchaseTogetherProductIconsRowContainer>
                                 <PurchaseTogetherRowText>
@@ -1022,7 +1055,7 @@ const Component4 : React.FC = () => {
                             </PurchaseTogetherCheckContainer>
                             
                             <PurchaseTogetherStarProductContainer>
-                                <Feather name="star" size={20} color="black"/>
+                                <Feather name="star" size={20} color={colors.text}/>
                             </PurchaseTogetherStarProductContainer>
 
                         </PurchaseTogetherItem>
@@ -1048,11 +1081,11 @@ const Component4 : React.FC = () => {
                                 </PurchaseTogetherProductTitle>
                                 <PurchaseTogetherProductIconsRowContainer>
 
-                                    <Feather name="anchor" size={12} color="black"/>
-                                    <Feather name="anchor" size={12} color="black"/>
-                                    <Feather name="anchor" size={12} color="black"/>
-                                    <Feather name="anchor" size={12} color="black"/>
-                                    <Feather name="anchor" size={12} color="black"/>
+                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                    <Feather name="anchor" size={12} color={colors.text}/>
 
                                 </PurchaseTogetherProductIconsRowContainer>
                                 <PurchaseTogetherRowText>
@@ -1076,7 +1109,7 @@ const Component4 : React.FC = () => {
                             </PurchaseTogetherCheckContainer>
                             
                             <PurchaseTogetherStarProductContainer>
-                                <Feather name="star" size={20} color="black"/>
+                                <Feather name="star" size={20} color={colors.text}/>
                             </PurchaseTogetherStarProductContainer>
 
                         </PurchaseTogetherItem>
@@ -1097,11 +1130,11 @@ const Component4 : React.FC = () => {
                                 </PurchaseTogetherProductTitle>
                                 <PurchaseTogetherProductIconsRowContainer>
 
-                                    <Feather name="anchor" size={12} color="black"/>
-                                    <Feather name="anchor" size={12} color="black"/>
-                                    <Feather name="anchor" size={12} color="black"/>
-                                    <Feather name="anchor" size={12} color="black"/>
-                                    <Feather name="anchor" size={12} color="black"/>
+                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                    <Feather name="anchor" size={12} color={colors.text}/>
 
                                 </PurchaseTogetherProductIconsRowContainer>
                                 <PurchaseTogetherRowText>
@@ -1125,7 +1158,7 @@ const Component4 : React.FC = () => {
                             </PurchaseTogetherCheckContainer>
                             
                             <PurchaseTogetherStarProductContainer>
-                                <Feather name="star" size={20} color="black"/>
+                                <Feather name="star" size={20} color={colors.text}/>
                             </PurchaseTogetherStarProductContainer>
 
                         </PurchaseTogetherItem>
@@ -1146,11 +1179,11 @@ const Component4 : React.FC = () => {
                                 </PurchaseTogetherProductTitle>
                                 <PurchaseTogetherProductIconsRowContainer>
 
-                                    <Feather name="anchor" size={12} color="black"/>
-                                    <Feather name="anchor" size={12} color="black"/>
-                                    <Feather name="anchor" size={12} color="black"/>
-                                    <Feather name="anchor" size={12} color="black"/>
-                                    <Feather name="anchor" size={12} color="black"/>
+                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                    <Feather name="anchor" size={12} color={colors.text}/>
 
                                 </PurchaseTogetherProductIconsRowContainer>
                                 <PurchaseTogetherRowText>
@@ -1174,7 +1207,7 @@ const Component4 : React.FC = () => {
                             </PurchaseTogetherCheckContainer>
                             
                             <PurchaseTogetherStarProductContainer>
-                                <Feather name="star" size={20} color="black"/>
+                                <Feather name="star" size={20} color={colors.text}/>
                             </PurchaseTogetherStarProductContainer>
 
                         </PurchaseTogetherItem>
@@ -1198,6 +1231,7 @@ const Component4 : React.FC = () => {
 const vector = [Component1,Component2,Component3, Component4];
 
 
+
 interface CarouselProps {
     setPositionX(positionX : number) : void;
     setIndexView(indexView : number) : void;
@@ -1205,6 +1239,7 @@ interface CarouselProps {
     offsetX : number;
     indexView : number;
     imperativeScrollView : RefObject<ImperativeScrollViewHandles>
+    product : Product;
 }
 
 const Carousel :    ForwardRefRenderFunction<
@@ -1216,7 +1251,8 @@ const Carousel :    ForwardRefRenderFunction<
     indexView, 
     setIndexView, 
     offsetX, 
-    setOffsetX
+    setOffsetX,
+    product
 } , ref ) => {
     const scrollViewRef = useRef<ScrollView>(null);
 
@@ -1289,7 +1325,10 @@ const Carousel :    ForwardRefRenderFunction<
             <ContainerWrapper>
             {
                 vector.map( Component => (
-                    <Component key={Component.toString()}/>
+                    <Component 
+                        key={Component.toString()}
+                        product={product}
+                    />
                 ) )
             }
             </ContainerWrapper>

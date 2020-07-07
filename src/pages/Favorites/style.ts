@@ -12,7 +12,7 @@ import {
 export const Container = styled.View `
     flex : 1;
     display : flex;
-    background : #ffffff;
+    background : ${ props => props.theme.colors.background };
     position : relative;
     flex-direction : column;
 `;
@@ -29,12 +29,12 @@ export const FavoriteCardContainer = styled.View `
     width : 97%;
     align-items : center;
     border-top-width : ${ StyleSheet.hairlineWidth }px;
-    border-top-color : #ccc;
+    border-top-color : ${ props => props.theme.colors.labelButton };
     border-bottom-width : ${ StyleSheet.hairlineWidth }px;
-    border-bottom-color : #ccc;
+    border-bottom-color : ${ props => props.theme.colors.labelButton };
     position : relative;
     padding : 5px;
-    background : #ffffff;
+    background : ${ props => props.theme.colors.background };
     margin : 0 auto;
 `;
 export const FavoriteCardImage = styled.Image `
@@ -52,7 +52,7 @@ export const FavoriteCardInfo = styled.View `
 `;
 export const FavoriteCardTitle = styled.Text `
     font-size : 18px;
-    color : #444;
+    color : ${ props => props.theme.colors.label };
     font-family : 'Nunito_600SemiBold';
 `;
 export const FavoriteCardIconsRow = styled.View `
@@ -65,12 +65,12 @@ export const FavoriteCardIconsRow = styled.View `
 `;
 export const FavoriteCardMainPrice = styled.Text `
     font-size : 16px;
-    color : #24f;
+    color : ${ props => props.theme.colors.otherButtons };
     font-family : 'Nunito_600SemiBold';
 `;
 export const FavoriteCardSecondaryPrice = styled.Text `
     font-size : 13px;
-    color : #24f;
+    color : ${ props => props.theme.colors.otherButtons };
     font-family : 'Nunito_600SemiBold';
 `;
 

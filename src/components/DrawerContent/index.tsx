@@ -70,6 +70,12 @@ const DrawerContent : React.FC = (props : any) => {
             setName("Clique na foto para entrar");
         }
     }
+    async function loadTheme() {
+        return await getData('theme');
+    }
+    async function setTheme(theme : string) {
+        await storeData('theme', theme);
+    }
 
     useEffect( () => { 
         updateUserInfo();
@@ -77,10 +83,24 @@ const DrawerContent : React.FC = (props : any) => {
 
     useEffect( () => { 
         updateUserInfo();
+        loadTheme().then( resp => {
+            if( JSON.stringify(resp) === JSON.stringify("dark") ) {
+                state.setTheme(dark);
+                setIsDarkTheme(true);
+            }
+            else{
+                setIsDarkTheme(false);
+                state.setTheme(light);
+            }
+        } ).catch( _ => {
+            setTheme('light');
+            setIsDarkTheme(false);
+        } )
     }, []);
 
     const toggleTheme = () => {
-        state.setTheme(isDarkTheme ? dark : light);
+        state.setTheme(!isDarkTheme ? dark : light);
+        setTheme(!isDarkTheme ? 'dark' : 'light');
         setIsDarkTheme(!isDarkTheme);
     }
 

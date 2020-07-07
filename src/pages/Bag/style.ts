@@ -321,7 +321,7 @@ export const AddSuggestionToBagContent = styled.View `
 export const AddSuggestionToBagLabel = styled.Text `
     font-family : 'Nunito_900Black_Italic';
     font-size : 13px;
-    color : ${ props => props.theme.colors.background };
+    color : ${ props => props.theme.colors.text };
 `;
 
 /**Depois botar em um component diferente */

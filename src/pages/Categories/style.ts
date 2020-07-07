@@ -27,7 +27,7 @@ export const SearchInputContainer = styled.View `
 export const SearchButtonRipple = styled(TouchableRipple)`
     flex : .2;
     height : 52px;
-    background : #ccc;
+    background : ${ props => props.theme.colors.secundary };
     display : flex;
     align-items : center;
     justify-content : center;
@@ -37,7 +37,7 @@ export const SearchButtonRipple = styled(TouchableRipple)`
 export const SearchInput = styled(TextInput) `
     flex : 1;
     justify-content : center;
-    background : #fff;
+    background : ${ props => props.theme.colors.background };
     border-top-left-radius : 20px;
     border-color : transparent;
     height : 50px;
@@ -45,15 +45,15 @@ export const SearchInput = styled(TextInput) `
 export const Container = styled.View `
     flex : 1;
     display : flex;
-    background : white;
+    background : ${ props => props.theme.colors.background };
     position : relative;
 `;
 
 
-export const ContainerProdutos = styled.ScrollView `
+export const ContainerProdutos = styled.View `
     flex : 1;
     display : flex;
-    background : white;
+    background : ${ props => props.theme.colors.background };
     position : relative;
     max-width : 350px;
     width : 100%;
@@ -62,14 +62,14 @@ export const ContainerProdutos = styled.ScrollView `
 `;
 
 export const ProductContainer = styled.View `
-    flex : .4;
-    margin : 5px;
-    background : transparent;
+    margin : 20px auto;
     height : 220px;
+    width : 100%;
     border-radius : 6px;
     display : flex;
     flex-direction : row;
-    flex-wrap : wrap;
+    flex-wrap : nowrap;
+    
 `;
 
 export const ProductItemContainer = styled(TouchableRipple) `
@@ -81,6 +81,7 @@ export const ProductItemContainer = styled(TouchableRipple) `
     border-radius : 20px;
     display : flex;
     position : relative;
+    background : ${ props => props.theme.colors.secundary };
 `;
 export const Item = styled.View `
     width : 100%;
@@ -90,6 +91,7 @@ export const Item = styled.View `
     flex-direction : column;
     position : relative;
     align-items : center;
+    
 `;
 
 export const ProductImage = styled.Image `
@@ -101,8 +103,8 @@ export const ProductImage = styled.Image `
 
 export const ProductLegend = styled(Text) `
     font-family : 'Nunito_900Black_Italic';
-    font-size : 13px;
-    color : #888;
+    font-size : 18px;
+    color : ${ props => props.theme.colors.label};
     margin : 0 10px;
 `;
 
@@ -119,16 +121,16 @@ export const ProductAccuracy = styled.View `
 
 export const ProductPrice = styled(Text) `
     font-family : 'Nunito_900Black_Italic';
-    font-size : 14px;
-    color : #210124;
+    font-size : 18px;
+    color : ${ props => props.theme.colors.text };
     align-self : flex-start;
     margin-left : 10px;
 `;
 
 export const ProductPricePeace = styled(Text) `
     font-family : 'Nunito_600SemiBold';
-    font-size : 12px;
-    color : #888;
+    font-size : 15px;
+    color : ${ props => props.theme.colors.label };
     align-self : flex-start;
     margin-left : 10px;
 `;
@@ -148,9 +150,9 @@ export const ProductCircle = styled.View `
     border-radius : 100px;
     border-bottom-right-radius : 20px;
     border-bottom-left-radius : 20px;
-    background : #bef;
+    background : ${ props => props.theme.colors.primary };
     border : 2px;
-    border-color : #bff;
+    border-color : ${ props => props.theme.colors.tertiary };
     z-index : -1;
 `;
 export const ProductCircleTop = styled.View `
@@ -162,9 +164,9 @@ export const ProductCircleTop = styled.View `
     border-radius : 100px;
     border-top-right-radius : 20px;
     border-top-left-radius : 20px;
-    background : #def;
+    background : ${ props => props.theme.colors.secundary};
     border : 2px;
-    border-color : #ccc;
+    border-color : ${ props => props.theme.colors.labelButton };
     z-index : -1;
 `;
 
@@ -175,7 +177,7 @@ export const CategoriesScrollView = styled.ScrollView `
     width : 100%;
     display : flex;
     flex-direction : row;
-    background : #dcdcdc3f;
+    background : ${ props => props.theme.colors.secundary };
 `;
 export const CategoriesContent = styled.View `
     display : flex;
@@ -194,7 +196,7 @@ export const CategorieItem = styled.View `
 `;
 export const CategorieLabel = styled.Text `
     font-size : 14px;
-    color : #777;
+    color : ${ props => props.theme.colors.label };
     font-family : 'Nunito_600SemiBold';
 `;
 export const CategorieImage = styled.Image `
@@ -210,7 +212,7 @@ export const SliderScrollView = styled.ScrollView `
     width : 100%;
     display : flex;
     flex-direction : row;
-    background : #dcdcdc3f;
+    background : ${ props => props.theme.colors.background };
 `;
 
 export const SliderWrapper = styled.View `

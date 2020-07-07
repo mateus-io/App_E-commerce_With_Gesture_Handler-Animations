@@ -1,5 +1,6 @@
 export default {
     title : 'light',
+    placeholder : '#000',
     
     colors : {
         primary : '#bef',

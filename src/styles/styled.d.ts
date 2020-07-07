@@ -3,7 +3,8 @@ import 'styled-components/native';
 declare module 'styled-components/native' {
     export interface DefaultTheme {
         title : string,
-            
+        placeholder : string,
+        
         colors : {
             primary : string,
             secundary : string,

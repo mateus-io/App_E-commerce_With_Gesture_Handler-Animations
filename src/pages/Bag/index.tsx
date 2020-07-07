@@ -62,7 +62,10 @@ import {
 
 import { Feather } from '@expo/vector-icons';
 import { Checkbox } from 'react-native-paper';
-import { getData } from '../../utils/useAsyncStorage';
+import { 
+    ThemeContext
+} from 'styled-components/native';
+
 import {
     Alert,
     ActivityIndicator, 
@@ -85,6 +88,7 @@ const Bag = ( { navigation } : Props ) => {
     const [showCheckout, setShowCheckout] = useState(false);
 
     const { state } = useContext(AppContext);
+    const { colors } = useContext(ThemeContext);
 
     const stateChange = (state : State) => {
         switch (state.title) {
@@ -126,7 +130,7 @@ const Bag = ( { navigation } : Props ) => {
                                     </ProductLabelTitle>
 
                                     <ProductLabelExtraInformation>
-                                        <Feather name="shopping-bag" size={12} color="black"/>
+                                        <Feather name="shopping-bag" size={12} color={colors.text}/>
                                         <ProductLabelExtraText>
                                             Vendido e entrege por 
                                             <ProductLavelExtraTextBottom>
@@ -270,11 +274,11 @@ const Bag = ( { navigation } : Props ) => {
                                                     SmartPhone Motorola G8 Play  kljdsalkfj sdkjflak jfdklajf
                                                 </ProductLegend>
                                                 <ProductAccuracy>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
                                                 </ProductAccuracy>
                                                 <ProductPrice>
                                                     R$ 200,00
@@ -284,7 +288,7 @@ const Bag = ( { navigation } : Props ) => {
                                                 </ProductPricePeace>
 
                                                 <ProductStarComponent rippleColor="transparent" onPress={() => {}}>
-                                                    <Feather name="star" size={20} color="black"/>
+                                                    <Feather name="star" size={20} color={colors.text}/>
                                                 </ProductStarComponent>
                                                 <ProductCircle/>
                                                 <ProductCircleTop/>
@@ -294,7 +298,7 @@ const Bag = ( { navigation } : Props ) => {
                                     
                                     <AddSuggestionToBagButton>
                                         <AddSuggestionToBagContent>
-                                            <Feather name="shopping-bag" size={20} color="white"/>
+                                            <Feather name="shopping-bag" size={20} color={colors.text}/>
 
                                             <AddSuggestionToBagLabel>
                                                 ADICIONAR
@@ -317,11 +321,11 @@ const Bag = ( { navigation } : Props ) => {
                                                     SmartPhone Motorola G8 Play  kljdsalkfj sdkjflak jfdklajf
                                                 </ProductLegend>
                                                 <ProductAccuracy>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
                                                 </ProductAccuracy>
                                                 <ProductPrice>
                                                     R$ 200,00
@@ -331,7 +335,7 @@ const Bag = ( { navigation } : Props ) => {
                                                 </ProductPricePeace>
 
                                                 <ProductStarComponent rippleColor="transparent" onPress={() => {}}>
-                                                    <Feather name="star" size={20} color="black"/>
+                                                    <Feather name="star" size={20} color={colors.text}/>
                                                 </ProductStarComponent>
                                                 <ProductCircle/>
                                                 <ProductCircleTop/>
@@ -341,7 +345,7 @@ const Bag = ( { navigation } : Props ) => {
                                     
                                     <AddSuggestionToBagButton>
                                         <AddSuggestionToBagContent>
-                                            <Feather name="shopping-bag" size={20} color="white"/>
+                                            <Feather name="shopping-bag" size={20} color={colors.text}/>
 
                                             <AddSuggestionToBagLabel>
                                                 ADICIONAR
@@ -364,11 +368,11 @@ const Bag = ( { navigation } : Props ) => {
                                                     SmartPhone Motorola G8 Play  kljdsalkfj sdkjflak jfdklajf
                                                 </ProductLegend>
                                                 <ProductAccuracy>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
-                                                    <Feather name="anchor" size={12} color="black"/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
+                                                    <Feather name="anchor" size={12} color={colors.text}/>
                                                 </ProductAccuracy>
                                                 <ProductPrice>
                                                     R$ 200,00
@@ -378,7 +382,7 @@ const Bag = ( { navigation } : Props ) => {
                                                 </ProductPricePeace>
 
                                                 <ProductStarComponent rippleColor="transparent" onPress={() => {}}>
-                                                    <Feather name="star" size={20} color="black"/>
+                                                    <Feather name="star" size={20} color={colors.text}/>
                                                 </ProductStarComponent>
                                                 <ProductCircle/>
                                                 <ProductCircleTop/>
@@ -388,7 +392,7 @@ const Bag = ( { navigation } : Props ) => {
                                     
                                     <AddSuggestionToBagButton>
                                         <AddSuggestionToBagContent>
-                                            <Feather name="shopping-bag" size={20} color="white"/>
+                                            <Feather name="shopping-bag" size={20} color={colors.text}/>
 
                                             <AddSuggestionToBagLabel>
                                                 ADICIONAR

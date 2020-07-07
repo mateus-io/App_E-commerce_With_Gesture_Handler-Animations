@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import {
     Container,
@@ -17,11 +17,15 @@ import Header from '../../components/Header';
 
 import { Feather } from '@expo/vector-icons';
 
+import { ThemeContext } from 'styled-components/native';
+
 type Props = {
     navigation : any;
 }
 
 const Favorites = ( { navigation } : Props ) => {
+    const { colors } = useContext(ThemeContext);
+
     return (
         <Container>
             <Header navigation={ navigation.toggleDrawer }/>
@@ -39,11 +43,11 @@ const Favorites = ( { navigation } : Props ) => {
                             Guarda-Roupa Solteiro Madesa Denver 2 Portas de Correr
                         </FavoriteCardTitle>
                         <FavoriteCardIconsRow>
-                            <Feather selectionColor="#24f" name="anchor" size={15} color="black"/>
-                            <Feather selectionColor="#24f" name="anchor" size={15} color="black"/>
-                            <Feather selectionColor="#24f" name="anchor" size={15} color="black"/>
-                            <Feather selectionColor="#24f" name="anchor" size={15} color="black"/>
-                            <Feather selectionColor="#24f" name="anchor" size={15} color="black"/>
+                            <Feather selectionColor={colors.otherButtons} name="anchor" size={15} color={colors.text}/>
+                            <Feather selectionColor={colors.otherButtons} name="anchor" size={15} color={colors.text}/>
+                            <Feather selectionColor={colors.otherButtons} name="anchor" size={15} color={colors.text}/>
+                            <Feather selectionColor={colors.otherButtons} name="anchor" size={15} color={colors.text}/>
+                            <Feather selectionColor={colors.otherButtons} name="anchor" size={15} color={colors.text}/>
                         </FavoriteCardIconsRow>
 
                         <FavoriteCardMainPrice>
@@ -56,7 +60,7 @@ const Favorites = ( { navigation } : Props ) => {
 
                     </FavoriteCardInfo>
                     <FavoriteCardStar>
-                        <Feather selectionColor="#000" name="star" size={25} color="#24f"/>  
+                        <Feather selectionColor={colors.text} name="star" size={25} color={colors.otherButtons}/>  
                     </FavoriteCardStar>
                 </FavoriteCardContainer>
 
@@ -74,11 +78,11 @@ const Favorites = ( { navigation } : Props ) => {
                             Guarda-Roupa Solteiro Madesa Denver 2 Portas de Correr
                         </FavoriteCardTitle>
                         <FavoriteCardIconsRow>
-                            <Feather selectionColor="#24f" name="anchor" size={15} color="black"/>
-                            <Feather selectionColor="#24f" name="anchor" size={15} color="black"/>
-                            <Feather selectionColor="#24f" name="anchor" size={15} color="black"/>
-                            <Feather selectionColor="#24f" name="anchor" size={15} color="black"/>
-                            <Feather selectionColor="#24f" name="anchor" size={15} color="black"/>
+                            <Feather selectionColor={colors.otherButtons} name="anchor" size={15} color={colors.text}/>
+                            <Feather selectionColor={colors.otherButtons} name="anchor" size={15} color={colors.text}/>
+                            <Feather selectionColor={colors.otherButtons} name="anchor" size={15} color={colors.text}/>
+                            <Feather selectionColor={colors.otherButtons} name="anchor" size={15} color={colors.text}/>
+                            <Feather selectionColor={colors.otherButtons} name="anchor" size={15} color={colors.text}/>
                         </FavoriteCardIconsRow>
 
                         <FavoriteCardMainPrice>
@@ -91,7 +95,7 @@ const Favorites = ( { navigation } : Props ) => {
 
                     </FavoriteCardInfo>
                     <FavoriteCardStar>
-                        <Feather selectionColor="#000" name="star" size={25} color="#24f"/>  
+                        <Feather selectionColor={colors.text} name="star" size={25} color={colors.otherButtons}/>  
                     </FavoriteCardStar>
                 </FavoriteCardContainer>
             </ContainerContent>

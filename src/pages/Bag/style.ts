@@ -424,3 +424,15 @@ export const ProductCircleTop = styled.View `
     border-color : ${ props => props.theme.colors.labelButton };
     z-index : -1;
 `;
+
+
+export const GoBackButton = styled.TouchableWithoutFeedback `
+    position : absolute;
+    top : 20px;
+    left : 20px;
+    width : 25px;
+    height : 15px;
+    display : flex;
+    align-items : center;
+    justify-content : center;
+`;

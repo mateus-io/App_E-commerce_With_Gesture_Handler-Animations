@@ -3,11 +3,23 @@ import React, { createContext, useState, useEffect } from 'react';
 import { getData } from './utils/useAsyncStorage';
 import light from './styles/themes/light';
 
+type Product = {
+    id : number;
+    title : string;
+    main_image_url : string;
+    images_url : string;
+    assessments : number;
+    price : number;
+    plots : string;
+}
+
 type InitialStateType = {
     logged: boolean;
     setLogged(value : boolean) : void;
     theme : any;
     setTheme(value : any) : void;
+    orders : Product[],
+    setOrders(value : Product[]) : void; 
 }
 
 const initializeUser = async () => {
@@ -18,7 +30,9 @@ const initialState = {
     logged: String(initializeUser()) !== "null",
     setLogged : () => {},
     theme : "",
-    setTheme : () => {}
+    setTheme : () => {},
+    orders : [],
+    setOrders : () => {},
 }
 
 const AppContext = createContext<{
@@ -30,6 +44,7 @@ const AppContext = createContext<{
 const AppProvider: React.FC = ({ children }) => {
     const [logged, setLogged] = useState(false);
     const [theme, setTheme] = useState(light);
+    const [orders, setOrders] = useState<Product[]>([]);
     
     useEffect( () => {
         const response = initializeUser();
@@ -42,7 +57,9 @@ const AppProvider: React.FC = ({ children }) => {
         logged: logged,
         setLogged : setLogged,
         theme : theme,
-        setTheme : setTheme
+        setTheme : setTheme,
+        orders : orders,
+        setOrders : setOrders
     }
 
     return (

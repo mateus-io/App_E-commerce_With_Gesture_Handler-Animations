@@ -69,6 +69,10 @@ import ImagesWrapper from '../ImagesWrapper';
 
 import { ThemeContext } from 'styled-components/native';
 
+import api from '../../api/api';
+
+import { getData } from '../../utils/useAsyncStorage';
+
 type Product = {
     id : number;
     title : string;
@@ -88,8 +92,11 @@ const Component1 : React.FC<SpecProductProps> = ({ product }) => {
     const scrollViewRefSuggestions = useRef<ImperativeScrollViewHandles>(null);
     const scrollViewRefLikedToo = useRef<ImperativeScrollViewHandles>(null);
     const [indexImage, setIndexImage] = useState(0);
+    const [showCheckout, setShowCheckout] = useState(false);
+
 
     const { colors } = useContext(ThemeContext);
+    const { state } = useContext(AppContext);
 
     let offset = 0;
     const translateX = new Animated.Value(0);
@@ -186,6 +193,25 @@ const Component1 : React.FC<SpecProductProps> = ({ product }) => {
             translateX.setOffset(offset);
             translateX.setValue(0);
         }
+    }
+
+    async function handleAddBag (id : number) {
+        try {
+            const token = await getData('token');
+            
+            const response = await api.post('/orders', {
+                product_id : id
+            }, {
+                headers : {
+                    Authorization : token
+                }
+            });
+            state.setOrders([...state.orders, product]);
+            console.log(response);
+        } catch(e) {
+            console.log(e);
+        }
+        
     }
 
     return(
@@ -311,7 +337,7 @@ const Component1 : React.FC<SpecProductProps> = ({ product }) => {
 
                             <AddBagProductButton 
                                 rippleColor="#999"
-                                onPress={ () => {} }
+                                onPress={ () => handleAddBag(product.id)}
                             >
                                 <PurchaseButtonContent>
                                     <Feather name="shopping-bag" size={20} color={colors.buy}/>
@@ -1003,6 +1029,7 @@ import {
 
 import { Checkbox } from 'react-native-paper';
 import { color } from 'react-native-reanimated';
+import { AppContext } from '../../context';
 
 const Component4 : React.FC<SpecProductProps> = ({ product }) => {
     const { colors } = useContext(ThemeContext);

@@ -41,6 +41,7 @@ import {
     ProductAddMoreButton,
     AddMoreItemsToBagContainer,
     AddMoreItemsToBagContent,
+    GoBackButton,
 
     CarouselSuggestionCard,
     ProductSuggestionItemContainer,
@@ -76,6 +77,8 @@ import { WebView } from 'react-native-webview';
 import SignIn from '../../components/SignIn';
 
 import { AppContext } from '../../context';
+import api from '../../api/api';
+import { getData } from '../../utils/useAsyncStorage';
 
 type Props = {
     navigation : any;
@@ -84,11 +87,53 @@ type State = {
     title : string;
 }
 
+type Product = {
+    id : number;
+    title : string;
+    main_image_url : string;
+    images_url : string;
+    assessments : number;
+    price : number;
+    plots : string;
+}
+
 const Bag = ( { navigation } : Props ) => {
     const [showCheckout, setShowCheckout] = useState(false);
+    const [total, setTotal] = useState(0);
+    const [token, setToken] = useState('');
+    const [suggestions, setSuggestionst] = useState<Product[]>([]);
 
     const { state } = useContext(AppContext);
     const { colors } = useContext(ThemeContext);
+
+    async function loadOrders() {
+
+        try {
+            const tokenRetrieved = await getData('token');
+            setToken(String(tokenRetrieved));
+            const response = await api.get('/orders', {
+                headers : {
+                    Authorization : tokenRetrieved
+                }
+            });
+            console.log('products');
+            console.log(response.data.products);
+            state.setOrders(response.data.products);
+            setTotal(Number(response.data.total));
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    async function loadSuggestions() {
+        let prod
+    }
+
+    useEffect( () => {
+        loadOrders();
+        if(state.orders.length > 0){
+            loadSuggestions();
+        }
+    }, [state.orders]);
 
     const stateChange = (state : State) => {
         switch (state.title) {
@@ -116,101 +161,106 @@ const Bag = ( { navigation } : Props ) => {
                 <Container>
                     <Header navigation={ navigation.toggleDrawer }/>
                     <ContainerContent>
-                        <ProductItemContainer>
-                            <ProductItemMainContent>
-                                <ProductImage
-                                    source=
-                                        { { 
-                                            uri : 'https://p.kindpng.com/picc/s/91-910946_jordan-jumpman-hustle-sneakers-hd-png-download.png' 
-                                        } }
-                                />
-                                <ProductInformationRightSide>
-                                    <ProductLabelTitle numberOfLines={2}>
-                                        Smartphone Samsung Galaxy A10s 32GB Preto - 4G 2GB RAM 6,2" Câmera
-                                    </ProductLabelTitle>
+                        {
+                            state.orders.map( (product : Product) => (
+                                <ProductItemContainer key={product.id}>
+                                    <ProductItemMainContent>
+                                        <ProductImage
+                                            source=
+                                                { { 
+                                                    uri : 'https://p.kindpng.com/picc/s/91-910946_jordan-jumpman-hustle-sneakers-hd-png-download.png' 
+                                                } }
+                                        />
+                                        <ProductInformationRightSide>
+                                            <ProductLabelTitle numberOfLines={2}>
+                                                {product.title}
+                                            </ProductLabelTitle>
 
-                                    <ProductLabelExtraInformation>
-                                        <Feather name="shopping-bag" size={12} color={colors.text}/>
-                                        <ProductLabelExtraText>
-                                            Vendido e entrege por 
-                                            <ProductLavelExtraTextBottom>
-                                                AnchorShop
-                                            </ProductLavelExtraTextBottom>
-                                        </ProductLabelExtraText>
-                                    </ProductLabelExtraInformation>
+                                            <ProductLabelExtraInformation>
+                                                <Feather name="shopping-bag" size={12} color={colors.text}/>
+                                                <ProductLabelExtraText>
+                                                    Vendido e entrege por 
+                                                    <ProductLavelExtraTextBottom>
+                                                        AnchorShop
+                                                    </ProductLavelExtraTextBottom>
+                                                </ProductLabelExtraText>
+                                            </ProductLabelExtraInformation>
 
-                                </ProductInformationRightSide>
-                            </ProductItemMainContent>
+                                        </ProductInformationRightSide>
+                                    </ProductItemMainContent>
 
-                            <ProductQuantityContainer>
-                                <ProductQuantityTitle>
-                                    Quantidade : 
-                                </ProductQuantityTitle>
-                                <ProductQuantityRowContainer>
-                                    <ProductQuantitySwitchContainer>
-                                        <ProductQuantitySwitchItemTouchable>
-                                            <ProductQuantitySwitchItemContainer>
-                                                <Feather name="minus" size={18} color="red"/>
-                                            </ProductQuantitySwitchItemContainer>
-                                        </ProductQuantitySwitchItemTouchable>
+                                    <ProductQuantityContainer>
+                                        <ProductQuantityTitle>
+                                            Quantidade : 
+                                        </ProductQuantityTitle>
+                                        <ProductQuantityRowContainer>
+                                            <ProductQuantitySwitchContainer>
+                                                <ProductQuantitySwitchItemTouchable>
+                                                    <ProductQuantitySwitchItemContainer>
+                                                        <Feather name="minus" size={18} color="red"/>
+                                                    </ProductQuantitySwitchItemContainer>
+                                                </ProductQuantitySwitchItemTouchable>
 
-                                        <ProductQuantitySwitchItemContainer>
-                                            <ProductQuatitySwitchNumberLabel>
-                                                1
-                                            </ProductQuatitySwitchNumberLabel>
-                                        </ProductQuantitySwitchItemContainer>
+                                                <ProductQuantitySwitchItemContainer>
+                                                    <ProductQuatitySwitchNumberLabel>
+                                                        1
+                                                    </ProductQuatitySwitchNumberLabel>
+                                                </ProductQuantitySwitchItemContainer>
 
-                                        <ProductQuantitySwitchItemTouchable>
-                                            <ProductQuantitySwitchItemContainer>
-                                                <Feather name="plus" size={18} color="green"/>
-                                            </ProductQuantitySwitchItemContainer>
-                                        </ProductQuantitySwitchItemTouchable>
-                                    </ProductQuantitySwitchContainer>
+                                                <ProductQuantitySwitchItemTouchable>
+                                                    <ProductQuantitySwitchItemContainer>
+                                                        <Feather name="plus" size={18} color="green"/>
+                                                    </ProductQuantitySwitchItemContainer>
+                                                </ProductQuantitySwitchItemTouchable>
+                                            </ProductQuantitySwitchContainer>
 
-                                    <ProductQuantityPriceContainer>
-                                        <ProductQuantityPriceMainText>
-                                            R$ 999,90 ou
-                                        </ProductQuantityPriceMainText>
-                                        <ProductQuantityPriceDiscount>
-                                            R$ 929,07 à vista
-                                        </ProductQuantityPriceDiscount>
-                                    </ProductQuantityPriceContainer>
+                                            <ProductQuantityPriceContainer>
+                                                <ProductQuantityPriceMainText>
+                                                    R$ {`${product.price.toString().replace('.', ',')}`} ou
+                                                </ProductQuantityPriceMainText>
+                                                <ProductQuantityPriceDiscount>
+                                                    R$ {`${product.price.toString().replace('.', ',')}`} à vista
+                                                </ProductQuantityPriceDiscount>
+                                            </ProductQuantityPriceContainer>
 
 
-                                </ProductQuantityRowContainer>
+                                        </ProductQuantityRowContainer>
 
-                            </ProductQuantityContainer>
+                                    </ProductQuantityContainer>
 
-                            <ProductExtraItemsContainer>
-                                <Checkbox
-                                    status='checked'
-                                />
-                                <ProductExtraColumn>
-                                    <ProductExtraMainText>
-                                        ADICIONAR GARANTIA ESTENDIDA
-                                    </ProductExtraMainText>
-                                    <ProductExtraSecondaryText>
-                                        A partir de R$ 149,85
-                                    </ProductExtraSecondaryText>
-                                </ProductExtraColumn>
-                            </ProductExtraItemsContainer>
+                                    <ProductExtraItemsContainer>
+                                        <Checkbox
+                                            status='checked'
+                                        />
+                                        <ProductExtraColumn>
+                                            <ProductExtraMainText>
+                                                ADICIONAR GARANTIA ESTENDIDA
+                                            </ProductExtraMainText>
+                                            <ProductExtraSecondaryText>
+                                                A partir de R$ 149,85
+                                            </ProductExtraSecondaryText>
+                                        </ProductExtraColumn>
+                                    </ProductExtraItemsContainer>
 
-                            <ProductExtraItemsContainer>
-                                <Checkbox
-                                    status='checked'
-                                />
-                                <ProductExtraColumn>
-                                    <ProductExtraMainText>
-                                        ADICIONAR GARANTIA ESTENDIDA
-                                    </ProductExtraMainText>
-                                    <ProductExtraSecondaryText>
-                                        A partir de R$ 149,85
-                                    </ProductExtraSecondaryText>
-                                </ProductExtraColumn>
-                                
-                            </ProductExtraItemsContainer>
+                                    <ProductExtraItemsContainer>
+                                        <Checkbox
+                                            status='checked'
+                                        />
+                                        <ProductExtraColumn>
+                                            <ProductExtraMainText>
+                                                ADICIONAR GARANTIA ESTENDIDA
+                                            </ProductExtraMainText>
+                                            <ProductExtraSecondaryText>
+                                                A partir de R$ 149,85
+                                            </ProductExtraSecondaryText>
+                                        </ProductExtraColumn>
+                                        
+                                    </ProductExtraItemsContainer>
 
-                        </ProductItemContainer>
+                                </ProductItemContainer>
+                            ) )
+                        }
+                        
 
                         <ProductSubtotalContainer>
                             <ProductSubtotalButton>
@@ -225,10 +275,10 @@ const Bag = ( { navigation } : Props ) => {
                                 </ProductSubtotalMiniLabel>
                                 <ProductCalculateValueContainer>
                                     <ProductPriceSubtotalBolder>
-                                        R$ 999,00
+                                        R$ {`${total.toString().replace('.', ',')}`}
                                     </ProductPriceSubtotalBolder>
                                     <ProductPriceSubtotalNormal>
-                                        R$ 929,07 à vista
+                                        R$ R$ {`${total.toString().replace('.', ',')}`} à vista
                                     </ProductPriceSubtotalNormal>
                                 </ProductCalculateValueContainer>
                             </ProductSubtotalNumberContainer>
@@ -239,7 +289,7 @@ const Bag = ( { navigation } : Props ) => {
                             <ProductContinueButton>
                                 <ProductContinueLabel 
                                     onPress={ () => {
-                                        //setShowCheckout(true);
+                                        setShowCheckout(true);
                                     } }
                                 >
                                     CONTINUAR
@@ -408,18 +458,27 @@ const Bag = ( { navigation } : Props ) => {
                     </ContainerContent>
                 </Container>
             :
-                <View style={{ flex: 1, justifyContent: 'center' }}>
+                <View style={{ flex: 1, justifyContent: 'center', position : 'relative' }}>
                     <WebView
                         source={{ 
-                            uri: `http://localhost:3333/orders/payments`,
+                            uri: `https://e-commerce-tests.herokuapp.com/orders/payments`,
                             headers : {
-                                authorization : '1'
+                                Authorization : token
                             }
                         }}
                         onNavigationStateChange={(state : State) => stateChange(state)}
                         startInLoadingState={true}
                         renderLoading={() => <ActivityIndicator></ActivityIndicator>}
                     />
+                    <GoBackButton
+                        onPress={() => setShowCheckout(false)}
+                    >
+                        <Feather 
+                            name="corner-up-left"
+                            size={15}
+                            color={colors.labelButton1}
+                        />
+                    </GoBackButton>
                 </View>
     );
 }

@@ -269,6 +269,9 @@ const SignIn : React.FC<SignInProps> = ({navigate}) => {
                             autoCorrect={false}
                             placeholderTextColor={colors.text}
                             onFocus={ () => setOpenKeyboard(true) }
+                            textContentType="password"
+                            
+                            secureTextEntry
                         />
 
                         <SignInSocialRow>

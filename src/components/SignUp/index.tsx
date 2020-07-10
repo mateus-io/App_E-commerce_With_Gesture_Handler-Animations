@@ -147,6 +147,9 @@ const SignUp : React.FC<SignUpProps> = ({navigate, route, setActiveSignUp}) => {
                             numberOfLines={1}
                             autoCorrect={false}
                             placeholderTextColor={colors.text}
+                            textContentType="password"
+                            
+                            secureTextEntry
                             style={{
                                 marginTop : 5
                             }}

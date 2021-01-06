@@ -16,7 +16,7 @@
     "@react-navigation/native": "^5.5.1",
     "@types/expo__vector-icons": "^9.0.1",
     "@types/styled-components": "^5.1.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "expo": "~37.0.3",
     "expo-facebook": "~8.1.0",
     "expo-font": "~8.1.0",
